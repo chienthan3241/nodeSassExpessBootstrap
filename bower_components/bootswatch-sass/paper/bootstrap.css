@@ -5465,10 +5465,10 @@ button {
   letter-spacing: .1px;
   text-rendering: optimizeLegibility; }
 
-a {
+/*a {
   -webkit-transition: all 0.2s;
   -o-transition: all 0.2s;
-  transition: all 0.2s; }
+  transition: all 0.2s; }*/
 
 textarea,
 textarea.form-control,

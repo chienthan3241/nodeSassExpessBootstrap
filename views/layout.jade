@@ -1,10 +1,18 @@
 doctype html
 html(ng-app="app")
   head
+    meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
-    link(rel='styleSheet', href='/stylesheets/bootstrap.min.css')
+    link(rel='stylesheet', href='/engine1/style.css')
+    //script(src='/engine1/jquery.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
+    script(src='/javascripts/froogaloop2.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js')
+    script(src='/javascripts/angular.js')
   body
     include nav
+    include headerSlider
     block content
-    include footer
