@@ -34,8 +34,8 @@
       <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/engine1/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.1538461">
-              <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
+            <state vertical-scroll-proportion="166.11111">
+              <caret line="10" column="18" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="18" />
               <folding>
                 <element signature="e#2697#3182#1" expanded="true" />
                 <element signature="e#3300#3757#1" expanded="true" />
@@ -54,33 +54,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/Documents/WOW Slider/engine1/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="wowslider.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="wowslider.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/engine1/wowslider.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-67.51852">
-              <caret line="694" column="22" selection-start-line="694" selection-start-column="22" selection-end-line="694" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.33333334">
+              <caret line="1929" column="9" selection-start-line="1929" selection-start-column="9" selection-end-line="1929" selection-end-column="9" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="e#40360#41621#0" expanded="false" />
-                <element signature="e#41654#42820#0" expanded="false" />
-                <element signature="e#43349#48578#0" expanded="false" />
-                <element signature="e#48604#48677#0" expanded="false" />
-                <element signature="e#48794#49019#0" expanded="false" />
+                <element signature="e#40345#41606#0" expanded="false" />
+                <element signature="e#41639#42805#0" expanded="false" />
+                <element signature="e#43334#48563#0" expanded="false" />
+                <element signature="e#48589#48662#0" expanded="false" />
+                <element signature="e#48779#49004#0" expanded="false" />
                 <element signature="n#!!block;n#wowsliderVideo#0" expanded="false" />
-                <element signature="n#!!block;n#ws_caption_slide#0" expanded="false" />
-                <marker date="1435745648000" expanded="true" signature="4270:4336" placeholder="..." />
-                <marker date="1435745648000" expanded="true" signature="30690:30702" placeholder="..." />
-                <marker date="1435745648000" expanded="true" signature="30764:30776" placeholder="..." />
+                <element signature="n#!!block;n#c#0;n#!!block;n#ws_caption_slide#0" expanded="false" />
+                <element signature="n#!!block;n#a#0;n#!!block;n#ws_caption_slide#0" expanded="false" />
+                <element signature="n#!!block;n#b#0;n#!!block;n#ws_caption_slide#0" expanded="false" />
+                <marker date="1435758204000" expanded="true" signature="4270:4336" placeholder="..." />
+                <marker date="1435758204000" expanded="true" signature="30675:30687" placeholder="..." />
+                <marker date="1435758204000" expanded="true" signature="30749:30761" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -106,7 +98,7 @@
         <entry file="file://$PROJECT_DIR$/public/engine1/script.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="124.111115">
-              <caret line="70" column="354" selection-start-line="70" selection-start-column="346" selection-end-line="70" selection-end-column="354" />
+              <caret line="70" column="52" selection-start-line="70" selection-start-column="52" selection-end-line="70" selection-end-column="52" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -124,11 +116,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="headerSlider.jade" pinned="false" current-in-tab="true">
+      <file leaf-file-name="headerSlider.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/headerSlider.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.41447368">
-              <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -137,8 +129,8 @@
       <file leaf-file-name="layout.jade" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/views/layout.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="28" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="28" />
+            <state vertical-scroll-proportion="-6.6">
+              <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -171,17 +163,17 @@
         <option value="$PROJECT_DIR$/public/engine1/script.js" />
         <option value="$PROJECT_DIR$/public/javascripts/froogaloop2.min.js" />
         <option value="$PROJECT_DIR$/bower_components/bootstrap-sass-official/assets/stylesheets/bootstrap/_normalize.scss" />
-        <option value="$PROJECT_DIR$/views/layout.jade" />
         <option value="$PROJECT_DIR$/sass/bootstrap.min.scss" />
         <option value="$PROJECT_DIR$/public/stylesheets/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/bower_components/bootswatch-sass/paper/_bootswatch.scss" />
         <option value="$PROJECT_DIR$/bower_components/bootswatch-sass/paper/bootstrap.css" />
         <option value="$PROJECT_DIR$/bower_components/bootswatch-sass/paper/bootstrap.min.css" />
         <option value="$PROJECT_DIR$/public/engine1/wowslider.mod.js" />
-        <option value="$PROJECT_DIR$/public/engine1/wowslider.js" />
+        <option value="$PROJECT_DIR$/sass/style.scss" />
         <option value="$PROJECT_DIR$/public/engine1/style.css" />
         <option value="$PROJECT_DIR$/views/headerSlider.jade" />
-        <option value="$PROJECT_DIR$/sass/style.scss" />
+        <option value="$PROJECT_DIR$/views/layout.jade" />
+        <option value="$PROJECT_DIR$/public/engine1/wowslider.js" />
       </list>
     </option>
   </component>
@@ -823,60 +815,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/views/layout.jade">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="28" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/engine1/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="124.111115">
-          <caret line="70" column="354" selection-start-line="70" selection-start-column="346" selection-end-line="70" selection-end-column="354" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/engine1/wowslider.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-67.51852">
-          <caret line="694" column="22" selection-start-line="694" selection-start-column="22" selection-end-line="694" selection-end-column="22" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="e#40360#41621#0" expanded="false" />
-            <element signature="e#41654#42820#0" expanded="false" />
-            <element signature="e#43349#48578#0" expanded="false" />
-            <element signature="e#48604#48677#0" expanded="false" />
-            <element signature="e#48794#49019#0" expanded="false" />
-            <element signature="n#!!block;n#wowsliderVideo#0" expanded="false" />
-            <element signature="n#!!block;n#ws_caption_slide#0" expanded="false" />
-            <marker date="1435745648000" expanded="true" signature="4270:4336" placeholder="..." />
-            <marker date="1435745648000" expanded="true" signature="30690:30702" placeholder="..." />
-            <marker date="1435745648000" expanded="true" signature="30764:30776" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Documents/WOW Slider/engine1/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/engine1/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.1538461">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding>
-            <element signature="e#2697#3182#1" expanded="true" />
-            <element signature="e#3300#3757#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -896,11 +839,62 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/engine1/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="166.11111">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="15" selection-end-line="10" selection-end-column="18" />
+          <folding>
+            <element signature="e#2697#3182#1" expanded="true" />
+            <element signature="e#3300#3757#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/views/headerSlider.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.41447368">
-          <caret line="0" column="10" selection-start-line="0" selection-start-column="10" selection-end-line="0" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="15" column="62" selection-start-line="15" selection-start-column="62" selection-end-line="15" selection-end-column="62" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/layout.jade">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.6">
+          <caret line="11" column="40" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/engine1/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="124.111115">
+          <caret line="70" column="52" selection-start-line="70" selection-start-column="52" selection-end-line="70" selection-end-column="52" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/engine1/wowslider.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="1929" column="9" selection-start-line="1929" selection-start-column="9" selection-end-line="1929" selection-end-column="9" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="e#40345#41606#0" expanded="false" />
+            <element signature="e#41639#42805#0" expanded="false" />
+            <element signature="e#43334#48563#0" expanded="false" />
+            <element signature="e#48589#48662#0" expanded="false" />
+            <element signature="e#48779#49004#0" expanded="false" />
+            <element signature="n#!!block;n#wowsliderVideo#0" expanded="false" />
+            <element signature="n#!!block;n#c#0;n#!!block;n#ws_caption_slide#0" expanded="false" />
+            <element signature="n#!!block;n#a#0;n#!!block;n#ws_caption_slide#0" expanded="false" />
+            <element signature="n#!!block;n#b#0;n#!!block;n#ws_caption_slide#0" expanded="false" />
+            <marker date="1435758204000" expanded="true" signature="4270:4336" placeholder="..." />
+            <marker date="1435758204000" expanded="true" signature="30675:30687" placeholder="..." />
+            <marker date="1435758204000" expanded="true" signature="30749:30761" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>

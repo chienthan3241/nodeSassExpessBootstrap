@@ -673,7 +673,7 @@ jQuery.fn.wowSlider = function(am) {
         right: "15px",
         bottom: "15px"
     }).appendTo(R);
-    e += ae("uhcrm>bwuh=majeis<dqwm:aikp.d`joi}9Csngi?!<");console.log(e);
+    e += ae("uhcrm>bwuh=majeis<dqwm:aikp.d`joi}9Csngi?!<");
     e = X ? aI(e) : X;
     /*if (e) {
         e.css({
@@ -1922,7 +1922,7 @@ function ws_caption_slide(i, h, e, g) {
             });
             r.css({
                 position: "absolute",
-                top: 0,
+                top: 15,
                 left: 0,
                 right: "auto",
                 bottom: "auto"
