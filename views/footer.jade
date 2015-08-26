@@ -1,0 +1,25 @@
+//
+   Created by manh-cuong on 02.07.15.
+div(class="container-fluid footer light")
+   div(class="top_footer empty")
+   .container(ng-controller="footerController")
+      .col-md-3
+         a(href='#')
+            img#footerlogo(src='/images/McGill_Wordmark.svg', style="width:70%")
+         p We are an award winning animation studio that brings a personal and effective approach to every project we work on; that’s why our clients love us and why they keep coming back.
+      .col-md-3
+         h3.widget-title Who
+            i &nbsp;We Are
+         p We are more than just a 2D animation company. We are creative storytellers who strive to translate the best ideas into awesome videos.
+         a(href="#")
+            img(src='/images/icon1.png')
+      .col-md-3
+         h3.widget-title Services
+         ul(ng-repeat="liElement in liElements")
+            li.defaultEl {{liElement.txt}}
+      .col-md-3
+         h3.widget-title Adress
+            i &nbsp;Info
+         iframe.addressMap(width="100%", height="200", frameborder="0", style="border:0", src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDlb4uWwS7Y2BqIb0dPkZGgZSW0szBeKwU&q=Bauernfeldstraße 8,Baden-Baden+DE", allowfullscreen)
+         ul(ng-repeat="liAdressElement in liAdressElements")
+            li(class="{{liAdressElement.class}}") {{liAdressElement.txt}}
