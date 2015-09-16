@@ -8,6 +8,19 @@ block content
         .container
             .col-md-12
                 h1 home
+    .container
+        table.table.table-striped.table-hover
+            thead
+                tr
+                    th id
+                    th name
+                    th email
+            tbody
+                each key in results
+                    tr
+                        td #{key._id}
+                        td #{key.name}
+                        td #{key.email}
     .container(ng-controller="AlertDemoCtrl")
         div.row(ng-repeat="alert in alerts")
             .alert.alert-dismissible(class="{{alert.type}}", class="col-md-{{alert.col}}")

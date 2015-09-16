@@ -2,18 +2,24 @@ body {
   padding-top: 50px;
 }
 #wowslider-container1{
-  -webkit-box-shadow: 0px 20px 32px -18px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 20px 32px -18px rgba(0,0,0,0.75);
-  box-shadow: 0px 20px 32px -18px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 24px 30px -10px rgba(0,0,0,0.7);
+  -moz-box-shadow: 0px 24px 30px -10px rgba(0,0,0,0.7);
+  box-shadow: 0px 24px 30px -10px rgba(0,0,0,0.7);
 }
 .header-box-container{
   width: 100%;
-  height: 400px;
-  background-color: #f7f7f7;
+  height: auto;
   border-bottom-style: solid;
   border-width: 1px;
-  padding-bottom: 40px;
-
+  /*padding-bottom: 40px;*/
+  background: url("/images/room10.jpg") no-repeat bottom;
+  background-size: 100%;
+  .header-content-container {
+    padding-top: 70px;
+    padding-right: 50px;
+    padding-bottom: 5%;
+    padding-left: 45%;
+  }
 }
 .page_title2{
   background: #3AB2E4 url("/images/footer-graph3.png") no-repeat center bottom;

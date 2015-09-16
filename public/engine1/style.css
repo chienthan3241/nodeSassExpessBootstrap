@@ -54,7 +54,8 @@
 	max-height:360px;
 	max-width: 100%;
 	vertical-align: top;
-	border:5px solid rgba(220, 220, 220, 0.6);
+	/*border:5px solid rgba(220, 220, 220, 0.6);*/
+	boder: none 0;
 	overflow: hidden;
 }
 #wowslider-container1 .ws_images ul a{

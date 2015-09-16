@@ -13,6 +13,7 @@
     "gulp": "^3.9.0",
     "gulp-sass": "^2.0.1",
     "jade": "~1.9.2",
+    "mongoose": "^4.1.5",
     "morgan": "~1.5.1",
     "normalize.css": "^3.0.3",
     "serve-favicon": "~2.2.0"
