@@ -1,0 +1,37 @@
+extends layout
+
+block header
+   include headerSlider
+
+block content
+   .container(ng-controller="usersManagement")
+      table.table.table-striped.table-hover
+         thead
+            tr
+               th id
+               th name
+               th email
+               th management
+         tbody
+            each key in results
+               tr
+                  td #{key._id}
+                  td #{key.name}
+                  td #{key.email}
+                  td
+                     form(method="POST", action="")
+                        input(type="hidden", name="id", value=key._id)
+                        input(type="hidden", name="_method", value="delete")
+                        button.btn.btn-danger(type="submit") delete
+            tr
+               form(method="POST", action="", id="insert_form", name="insert_form")
+                  input(type="hidden", name="_method", value="insert")
+               td
+               td
+                  div(ng-class="insert_form.username.$invalid && insert_form.username.$dirty ? 'has-error' : 'has-sucess")
+                     input.form-control(type="text", placeholder="name",form="insert_form", name="username", ng-model="user", required)
+               td
+                  input.form-control(type="email", placeholder="email",form="insert_form", name="email")
+               td
+
+                  button.btn.btn-success(type="submit", form="insert_form") add

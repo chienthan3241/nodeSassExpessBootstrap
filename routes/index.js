@@ -4,7 +4,6 @@ var user = require('../models/users');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  /*
   user.find(function(err, users) {
     if(err) {
       res.send(err);
@@ -14,8 +13,7 @@ router.get('/', function(req, res, next) {
       //res.send(JSON.stringify(users));
     }
   });
-  */
-  res.render('index', { title: 'Express', results: [] });
+  //res.render('index', { title: 'Express', results: [] });
 });
 
 module.exports = router;

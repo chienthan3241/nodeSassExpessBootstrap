@@ -6,8 +6,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 //mongoose
 var mongoose = require('mongoose');
-//mongodb connect: owrk on heroku only when mongoDB add one is added
+
 //mongoose.connect('mongodb://127.0.0.1/nodetest');
+mongoose.connect('mongodb://tmchut:Phuthuz123@ds055752.mongolab.com:55752/node_staging_eu');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');

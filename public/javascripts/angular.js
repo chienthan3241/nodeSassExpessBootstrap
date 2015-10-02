@@ -32,4 +32,7 @@
             {class: 'emailContact', txt: 'tmchut@yahoo.com'}
         ];
     }]);
+    app.controller('usersManagement', ['$scope', function ($scope) {
+
+    }]);
 })(window.angular);
