@@ -34,8 +34,8 @@ block content
                      input.form-control(type="email", placeholder="email", ng-model="userDefault.email")
                      label.control-label(ng-show="insertForm.useremail.$invalid") Email required or invalid!
                td
-                  button.btn.btn-success(type="submit", form="insert_form", ng-disabled="(insertForm.username.$invalid || insertForm.useremail.$invalid)") add
-      form(method="POST", action="", name="insertForm")
+                  button.btn.btn-success(type="submit", form="insertForm", ng-disabled="(insertForm.username.$invalid || insertForm.useremail.$invalid)") add
+      form(method="POST", action="", name="insertForm", id="insertForm")
          input(type="hidden", name="_method", value="insert")
          input(type="text", name="username", ng-model="userDefault.name", required, style="display:none")
          input(type="email", name="useremail", ng-model="userDefault.email", required, style="display:none")

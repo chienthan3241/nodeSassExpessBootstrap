@@ -32,7 +32,7 @@ router.post('/', function(req, res) {
         user.remove({'_id' : req.body.id}, function(err) {
             if (err) return handleError(err);
         });
-    } else if (req.body._method === "insert" && req.body.username && req.body.email) {
+    } else if (req.body._method === "insert" && req.body.username && req.body.useremail) {
         //insert user
         var newUser = new user({'name' : req.body.username, 'email' : req.body.useremail});
         newUser.save(function(err) {
