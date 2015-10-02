@@ -34,7 +34,7 @@ router.post('/', function(req, res) {
         });
     } else if (req.body._method === "insert" && req.body.username && req.body.email) {
         //insert user
-        var newUser = new user({'name' : req.body.username, 'email' : req.body.email});
+        var newUser = new user({'name' : req.body.username, 'email' : req.body.useremail});
         newUser.save(function(err) {
             if (err) return handleError(err);
         });
