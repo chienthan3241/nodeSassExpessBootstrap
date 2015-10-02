@@ -20,18 +20,22 @@ block content
                   td #{key.email}
                   td
                      form(method="POST", action="")
-                        input(type="hidden", name="id", value=key._id)
                         input(type="hidden", name="_method", value="delete")
+                        input(type="hidden", name="id", value=key._id)
                         button.btn.btn-danger(type="submit") delete
             tr
-               form(method="POST", action="", id="insert_form", name="insert_form")
-                  input(type="hidden", name="_method", value="insert")
                td
                td
-                  div(ng-class="insert_form.username.$invalid && insert_form.username.$dirty ? 'has-error' : 'has-sucess")
-                     input.form-control(type="text", placeholder="name",form="insert_form", name="username", ng-model="user", required)
+                  div(ng-class="(insertForm.username.$invalid) ? 'has-error' : 'has-success'")
+                     input.form-control(type="text", placeholder="name", ng-model="userDefault.name")
+                     label.control-label(ng-show="insertForm.username.$error.required") Username required!
                td
-                  input.form-control(type="email", placeholder="email",form="insert_form", name="email")
+                  div(ng-class="(insertForm.useremail.$invalid) ? 'has-error' : 'has-success'")
+                     input.form-control(type="email", placeholder="email", ng-model="userDefault.email")
+                     label.control-label(ng-show="insertForm.useremail.$invalid") Email required or invalid!
                td
-
-                  button.btn.btn-success(type="submit", form="insert_form") add
+                  button.btn.btn-success(type="submit", form="insert_form", ng-disabled="(insertForm.username.$invalid || insertForm.useremail.$invalid)") add
+      form(method="POST", action="", name="insertForm")
+         input(type="hidden", name="_method", value="insert")
+         input(type="text", name="username", ng-model="userDefault.name", required, style="display:none")
+         input(type="email", name="useremail", ng-model="userDefault.email", required, style="display:none")

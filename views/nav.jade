@@ -9,7 +9,7 @@ nav.navbar.navbar-default.navbar-fixed-top
                 img(src='/images/McGill_Wordmark.svg', style="max-width:100px")
         #navbar.collapse.navbar-collapse
             ul.nav.navbar-nav
-                each val in [{name: 'Home', href: '/', class: 'active'}, {name: 'Link', href: '/', class: ''}]
+                each val in [{name: 'Home', href: '/', class: 'active'}, {name: 'Link', href: '/users', class: ''}]
                     li(class=val.class)
                         a(href=val.href)= val.name
                         if val.class === 'active'

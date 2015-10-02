@@ -33,6 +33,9 @@
         ];
     }]);
     app.controller('usersManagement', ['$scope', function ($scope) {
-
+        $scope.userDefault = {name: '', email: ''};
+        $scope.delete = function (id) {
+            console.log(id);
+        };
     }]);
 })(window.angular);
