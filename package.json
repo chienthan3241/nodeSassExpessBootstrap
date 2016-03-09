@@ -17,5 +17,8 @@
     "morgan": "~1.5.1",
     "normalize.css": "^3.0.3",
     "serve-favicon": "~2.2.0"
+  },
+  "devDependencies": {
+    "gulp-open": "^1.0.0"
   }
 }

@@ -1,5 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var open = require('gulp-open'),
+    os = require('os');
 
 gulp.task('express', function() {
     var app = require('./app');
@@ -88,16 +90,26 @@ gulp.task('express', function() {
     }
 });
 
+//sass built task
 gulp.task('sass', function () {
     gulp.src('./sass/**/*.scss')
         .pipe(sass.sync().on('error', sass.logError))
         .pipe(gulp.dest('./public/stylesheets'));
 });
 
+//sass watch task
 gulp.task('sass:watch', function () {
     gulp.watch('./sass/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['express','sass','sass:watch'], function() {
+//task to open default browser and point to root
+gulp.task('open', function () {
+    var browser =   os.platform() === 'linux' ? 'google-chrome' : (
+                    os.platform() === 'darwin' ? 'google chrome' : (
+                    os.platform() === 'win32' ? 'chrome' : 'firefox'));
+    gulp.src('').pipe(open({app: browser, uri: 'http://localhost:3000'}));
+});
+
+gulp.task('default', ['express','sass','sass:watch','open'], function() {
 
 });
