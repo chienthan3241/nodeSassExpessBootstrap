@@ -7,19 +7,19 @@ body {
   position: relative;
   overflow: hidden; }
   .header-box-container .slider-window {
-    cursor: url("http://www.iconj.com/ico/h/s/hsrp2uscre.ico"), auto; }
+    cursor: url("/images/sliderImg/cursor_hand.ico"), auto; }
     .header-box-container .slider-window .slider1 {
       position: absolute;
       width: 100vw;
       height: 30vw;
       left: 0; }
       .header-box-container .slider-window .slider1 #slider1-bg {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/bg.jpg");
+        background-image: url("/images/sliderImg/bg.jpg");
         background-size: 100% 100%;
         width: 100%;
         height: 100%; }
       .header-box-container .slider-window .slider1 #slide1-object1 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ipad.png") no-repeat;
+        background: url("/images/sliderImg/ipad.png") no-repeat;
         background-size: 100% 100%;
         width: 30%;
         height: 70%;
@@ -29,7 +29,7 @@ body {
         opacity: 0;
         z-index: 10; }
       .header-box-container .slider-window .slider1 #slide1-object2 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ipad-screen-bg.jpg") no-repeat;
+        background: url("/images/sliderImg/ipad-screen-bg.jpg") no-repeat;
         background-size: 100% 100%;
         width: 21.6%;
         height: 49%;
@@ -39,7 +39,7 @@ body {
         z-index: 11;
         opacity: 0; }
       .header-box-container .slider-window .slider1 #slide1-object3 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ipad-reflect.png") no-repeat;
+        background: url("/images/sliderImg/ipad-reflect.png") no-repeat;
         background-size: 100% 100%;
         width: 20%;
         height: 60%;
@@ -49,7 +49,7 @@ body {
         z-index: 12;
         opacity: 0; }
       .header-box-container .slider-window .slider1 #slide1-object4 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/logo-white-stroke.png") no-repeat;
+        background: url("/images/sliderImg/logo-white-stroke.png") no-repeat;
         background-size: 100% 100%;
         width: 3%;
         height: 10%;
@@ -59,7 +59,7 @@ body {
         z-index: 15;
         opacity: 0; }
       .header-box-container .slider-window .slider1 #slide1-object5 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/logo.gif") no-repeat;
+        background: url("/images/sliderImg/logo.gif") no-repeat;
         background-size: 100% 100%;
         width: 1%;
         height: 2%;
@@ -69,7 +69,7 @@ body {
         z-index: 16;
         opacity: 0; }
       .header-box-container .slider-window .slider1 #slide1-object6 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/logo-trans-stroke.png") no-repeat;
+        background: url("/images/sliderImg/logo-trans-stroke.png") no-repeat;
         background-size: 100% 100%;
         width: 8%;
         height: 26%;
@@ -79,7 +79,7 @@ body {
         z-index: 13;
         opacity: 0; }
       .header-box-container .slider-window .slider1 #slide1-object7 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/hand.png") no-repeat;
+        background: url("/images/sliderImg/hand.png") no-repeat;
         background-size: 100% 100%;
         width: 14%;
         height: 50%;
@@ -89,52 +89,52 @@ body {
         z-index: 17;
         opacity: 0; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon1 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-1.png") no-repeat;
+        background: url("/images/sliderImg/ico-1.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon2 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-2.png") no-repeat;
+        background: url("/images/sliderImg/ico-2.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon3 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-3.png") no-repeat;
+        background: url("/images/sliderImg/ico-3.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-back-icon4 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-4.png") no-repeat;
+        background: url("/images/sliderImg/ico-4.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon5 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-5.png") no-repeat;
+        background: url("/images/sliderImg/ico-5.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-back-icon6 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-6.png") no-repeat;
+        background: url("/images/sliderImg/ico-6.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon7 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-7.png") no-repeat;
+        background: url("/images/sliderImg/ico-7.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-back-icon8 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-8.png") no-repeat;
+        background: url("/images/sliderImg/ico-8.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon9 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-9.png") no-repeat;
+        background: url("/images/sliderImg/ico-9.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon10 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-10.png") no-repeat;
+        background: url("/images/sliderImg/ico-10.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon11 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-11.png") no-repeat;
+        background: url("/images/sliderImg/ico-11.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon12 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-12.png") no-repeat;
+        background: url("/images/sliderImg/ico-12.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-front-icon13 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-13.png") no-repeat;
+        background: url("/images/sliderImg/ico-13.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-back-icon14 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-14.png") no-repeat;
+        background: url("/images/sliderImg/ico-14.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-back-icon15 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-15.png") no-repeat;
+        background: url("/images/sliderImg/ico-15.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 #slider1-icon-back-icon16 {
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ico-16.png") no-repeat;
+        background: url("/images/sliderImg/ico-16.png") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider1 span[id^="slider1-icon-front"] {
         opacity: 0;
@@ -181,7 +181,7 @@ body {
       .header-box-container .slider-window .slider2 #slider2-bg {
         width: 100%;
         height: 100%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/bg.png");
+        background: url("/images/sliderImg/bg.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider2 #slider2-object2 {
         position: absolute;
@@ -189,7 +189,7 @@ body {
         height: 54%;
         top: 36%;
         left: 60%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/imac.png");
+        background: url("/images/sliderImg/imac.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider2 #slider2-object3 {
         position: absolute;
@@ -197,7 +197,7 @@ body {
         height: 36%;
         top: 54%;
         left: 44%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/macbook.png");
+        background: url("/images/sliderImg/macbook.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider2 #slider2-object4 {
         position: absolute;
@@ -205,7 +205,7 @@ body {
         height: 36%;
         top: 60%;
         left: 56%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/ipad1.png");
+        background: url("/images/sliderImg/ipad1.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider2 #slider2-object5 {
         position: absolute;
@@ -213,7 +213,7 @@ body {
         height: 55%;
         bottom: 0;
         left: 24%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/iphone.png");
+        background: url("/images/sliderImg/iphone.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider2 #slider2-object6 {
         position: absolute;
@@ -221,7 +221,7 @@ body {
         height: 42%;
         bottom: 0;
         left: 40%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/hand.png");
+        background: url("/images/sliderImg/hand.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider2 #slider2-text1 {
         position: absolute;
@@ -257,7 +257,7 @@ body {
       .header-box-container .slider-window .slider3 #slider3-bg {
         width: 100%;
         height: 100%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/bg1.jpg");
+        background: url("/images/sliderImg/bg1.jpg");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider3 #slider3-object2 {
         position: absolute;
@@ -265,7 +265,7 @@ body {
         height: 50%;
         top: 20%;
         left: 36%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/cool-guy.png");
+        background: url("/images/sliderImg/cool-guy.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider3 #slider3-object3 {
         position: absolute;
@@ -273,7 +273,7 @@ body {
         height: 70%;
         top: 40%;
         left: 38%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/part-1.png");
+        background: url("/images/sliderImg/part-1.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider3 #slider3-object4 {
         position: absolute;
@@ -281,7 +281,7 @@ body {
         height: 70%;
         top: 60%;
         left: 42%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/part-2.png");
+        background: url("/images/sliderImg/part-2.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider3 #slider3-object5 {
         position: absolute;
@@ -289,7 +289,7 @@ body {
         height: 70%;
         top: 50%;
         left: 42%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/part-3.png");
+        background: url("/images/sliderImg/part-3.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider3 #slider3-object6 {
         position: absolute;
@@ -365,7 +365,7 @@ body {
       .header-box-container .slider-window .slider4 #slider4-bg {
         width: 100%;
         height: 100%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/bg3.jpg");
+        background: url("/images/sliderImg/bg3.jpg");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object1 {
         position: absolute;
@@ -373,7 +373,7 @@ body {
         height: 70%;
         top: 20%;
         left: 30%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/plane1.png");
+        background: url("/images/sliderImg/plane1.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object2 {
         position: absolute;
@@ -381,7 +381,7 @@ body {
         height: 70%;
         top: 20%;
         left: 27.5%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/plane2.png");
+        background: url("/images/sliderImg/plane2.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object3 {
         position: absolute;
@@ -389,7 +389,7 @@ body {
         height: 68.8%;
         top: 15.7%;
         left: 27.8%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/plane3.png");
+        background: url("/images/sliderImg/plane3.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object4 {
         position: absolute;
@@ -397,7 +397,7 @@ body {
         height: 30%;
         top: 16%;
         left: 30%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/hotspot.png");
+        background: url("/images/sliderImg/hotspot.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object5 {
         position: absolute;
@@ -405,7 +405,7 @@ body {
         height: 30%;
         top: 16.3%;
         left: 30.1%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/html-layer.png");
+        background: url("/images/sliderImg/html-layer.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object6 {
         position: absolute;
@@ -413,7 +413,7 @@ body {
         height: 30%;
         top: 16.6%;
         left: 30.2%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/image-layer.png");
+        background: url("/images/sliderImg/image-layer.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object7 {
         position: absolute;
@@ -421,7 +421,7 @@ body {
         height: 30%;
         top: 16.9%;
         left: 30.3%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/text-layer.png");
+        background: url("/images/sliderImg/text-layer.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object8 {
         position: absolute;
@@ -429,7 +429,7 @@ body {
         height: 30%;
         top: 17.2%;
         left: 30.4%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/video-layer.png");
+        background: url("/images/sliderImg/video-layer.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object9 {
         position: absolute;
@@ -437,7 +437,7 @@ body {
         height: 30%;
         top: 17.5%;
         left: 30.5%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/tooltip1.png");
+        background: url("/images/sliderImg/tooltip1.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object10 {
         position: absolute;
@@ -445,7 +445,7 @@ body {
         height: 30%;
         top: 38%;
         left: 32%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/tooltip-shadow.png");
+        background: url("/images/sliderImg/tooltip-shadow.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-object11 {
         position: absolute;
@@ -454,7 +454,7 @@ body {
         top: 40%;
         left: 64%;
         opacity: 0;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/infinit.png");
+        background: url("/images/sliderImg/infinit.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider4 #slider4-text1 {
         position: absolute;
@@ -501,7 +501,7 @@ body {
         width: 100%;
         height: 125%;
         bottom: 0;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/bg4.jpg") no-repeat;
+        background: url("/images/sliderImg/bg4.jpg") no-repeat;
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider5 #slider5-object1 {
         position: absolute;
@@ -509,7 +509,7 @@ body {
         height: 63%;
         top: 15%;
         left: 35%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/videoCoverThumb.jpg");
+        background: url("/images/sliderImg/videoCoverThumb.jpg");
         background-size: 100% 100%; }
         .header-box-container .slider-window .slider5 #slider5-object1 #slider5-object3 {
           position: relative;
@@ -534,7 +534,7 @@ body {
         height: 10%;
         top: 74%;
         left: 30%;
-        background: url("http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/video-shadow.png");
+        background: url("/images/sliderImg/video-shadow.png");
         background-size: 100% 100%; }
       .header-box-container .slider-window .slider5 #slider5-text1 {
         position: absolute;
@@ -573,7 +573,7 @@ body {
         padding-bottom: 0.3vw;
         padding-left: 0.5vw; }
   .header-box-container .slider-window:active {
-    cursor: url("http://www.iconj.com/ico/d/9/d9fcptkirh.ico"), auto; }
+    cursor: url("/images/sliderImg/cursor_drag_hand.ico"), auto; }
   .header-box-container .pg-bar {
     position: absolute;
     bottom: 0px;
