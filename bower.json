@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Manh Cuong <chienthan3241@yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/chienthan3241/nodeSassExpessBootstrap",
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootswatch-sass": "^3.3.1"
+  }
+}
