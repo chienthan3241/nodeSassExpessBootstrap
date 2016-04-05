@@ -1,46 +1,93 @@
 .header-box-container
-    .container-fluid
-        .header-content-container
-            #wowslider-container1
-                .ws_images
-                    ul
-                        li
-                            img#wows1_0(src="/data1/images/1928959.jpg", alt="1928959", title="1928959")
-                        li
-                            img#wows1_1(src="/data1/images/backgroundwallpapers24.jpg", alt="background-wallpapers-24",title="background-wallpapers-24")
-                        li
-                            img#wows1_2(src="/data1/images/twitterbackgroundvectors.jpg", alt="jquery image slider", title="twitter-background-vectors")
-                        li
-                            iframe(width="100%", height="100%", src="https://player.vimeo.com/video/73486778?autoplay=0&title=0&byline=0&badge=0&portrait=0&api=1&player_id=ws_vimeo_73486778.png", frameborder="0", id="ws_vimeo_73486778.png", allowfullscreen)
-                            img#wows1_3(src="/data1/images/73486778.png", alt="How to Catch a Bird", title="How to Catch a Bird")
-                        li
-                            iframe(width="100%", height="100%", src="//www.youtube.com/embed/QcIy9NiNbmo", frameborder="0", allowfullscreen)
-                            img#wows1_4(src="/data1/images/youtube.jpg", alt="Bad Blood", title="Bad Blood")
-                .ws_bullets
-                    div
-                        a(href="#", title="1928959")
-                            span
-                                img(src="/data1/tooltips/1928959.jpg", alt="1928959")
-                                1
-                        a(href="#", title="background-wallpapers-24")
-                            span
-                                img(src="/data1/tooltips/backgroundwallpapers24.jpg", alt="background-wallpapers-24")
-                                2
-                        a(href="#", title="twitter-background-vectors")
-                            span
-                                img(src="/data1/tooltips/twitterbackgroundvectors.jpg", alt="twitter-background-vectors")
-                                3
-                        a(href="#", title="Earth - Dream Koala")
-                            span
-                                img(src="/data1/tooltips/73486778.png", alt="How to Catch a Bird")
-                                4
-                        a(href="#", title="Bad Blood")
-                            span
-                                img(src="/data1/tooltips/youtube.jpg", alt="Bad Blood")
-                                5
-                .ws_script(style="position:absolute;left:-99%")
-                    a(href="http://wowslider.com") slider wordpress
-                    by WOWSlider.com v8.1m
-                .ws_shadow
-script(src="/engine1/wowslider.js")
-script(src="/engine1/script.js")
+    .slider-window
+        .slider1
+            #slider1-bg
+            #slide1-object1
+            #slide1-object2
+            #slide1-object3
+            #slide1-object4
+            #slide1-object5
+            #slide1-object6
+            #slide1-object7
+            span#slider1-icon-back-icon4
+            span#slider1-icon-back-icon6
+            span#slider1-icon-back-icon8
+            span#slider1-icon-back-icon14
+            span#slider1-icon-back-icon15
+            span#slider1-icon-back-icon16
+            span#slider1-icon-front-icon1
+            span#slider1-icon-front-icon2
+            span#slider1-icon-front-icon3
+            span#slider1-icon-front-icon5
+            span#slider1-icon-front-icon7
+            span#slider1-icon-front-icon9
+            span#slider1-icon-front-icon10
+            span#slider1-icon-front-icon11
+            span#slider1-icon-front-icon12
+            span#slider1-icon-front-icon13
+            span#slider1-text1 Lorem ipsum dolor sit amet
+            span#slider1-text2 Neque porro quisquam est
+        .slider2
+            #slider2-bg
+            #slider2-object2
+            #slider2-object3
+            #slider2-object4
+            #slider2-object5
+            #slider2-object6
+            span#slider2-text1 Responsive &
+            span#slider2-text2 Touch Swipe Navigation
+        .slider3
+            #slider3-bg
+            #slider3-object2
+            #slider3-object3
+            #slider3-object4
+            #slider3-object5
+            a.tooltip-point#slider3-object6(data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet" href="#")
+            a.tooltip-point#slider3-object7(data-toggle="tooltip" data-placement="top" title="Lorem ipsum dolor sit amet" href="#")
+            a.tooltip-point#slider3-object8(data-toggle="tooltip" data-placement="left" title="Lorem ipsum dolor sit amet" href="#")
+            span#slider3-text2 &
+            span#slider3-text1 Lorem ipsum dolor
+            span#slider3-text4 Transitions
+            span#slider3-text3 Super Smooth
+        .slider4
+            #slider4-bg
+            #slider4-object1
+            #slider4-object2
+            #slider4-object3
+            #slider4-object4
+            #slider4-object5
+            #slider4-object6
+            #slider4-object7
+            #slider4-object8
+            #slider4-object9
+            #slider4-object10
+            #slider4-object11
+            span#slider4-text1 Unlimited
+            span#slider4-text2 Transitions Effects
+            span#slider4-text3 In & Out Transitions Support
+        .slider5
+            #slider5-bg
+            #slider5-object2
+            #slider5-object1
+                iframe#vimeoFrame(src="https://player.vimeo.com/video/159788008?title=0&byline=0&api=1&player_id=vimeoFrame&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen)
+                #slider5-object3
+            span#slider5-text1 Video Player Support
+            span#slider5-text2 Youtube
+            span#slider5-text3 Vimeo
+    .pg-bar#pgBar
+    .bullet-container
+        .bullet-row
+            .ms-bullet#bullet1(onclick="goTo(1)")
+            .ms-bullet#bullet2(onclick="goTo(2)")
+            .ms-bullet#bullet3(onclick="goTo(3)")
+            .ms-bullet#bullet4(onclick="goTo(4)")
+            .ms-bullet#bullet5(onclick="goTo(5)")
+    .next-button(onclick="next(1)")
+    .previous-button(onclick="next(-1)")
+.pg-status
+script(src='/javascripts/froogaloop2.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TweenMax.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.2/TimelineMax.min.js')
+script(src='https://hammerjs.github.io/dist/hammer.js')
+script(src='https://cdn.jsdelivr.net/jquery.hammerjs/2.0.0/jquery.hammer.js')
+script(src='/javascripts/slider.js')
