@@ -735,7 +735,7 @@ body {
   float: left;
   padding: 40px 0;
   width: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   border-bottom-style: solid;
   border-width: 1px;
   h1{
@@ -814,5 +814,24 @@ img#footerlogo:hover{
   filter: none;
   -webkit-filter: grayscale(0);
   transition: all 0.5s;
+}
+
+.help-tip{
+  position: relative;
+  top: 18px;
+  right: 18px;
+  text-align: center;
+  background-color: #2196f3;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 26px;
+  cursor: default;
+}
+.help-tip:before{
+  content:'?';
+  font-weight: bold;
+  color:#fff;
 }
 

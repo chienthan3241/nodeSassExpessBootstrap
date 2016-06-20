@@ -12,6 +12,7 @@ mongoose.connect('mongodb://tmchut:Phuthuz123@ds055752.mongolab.com:55752/node_s
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var itunes = require('./routes/itunes');
 
 var app = express();
 
@@ -29,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+app.use('/itunes', itunes);
 
 
 // catch 404 and forward to error handler
