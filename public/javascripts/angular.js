@@ -42,6 +42,7 @@
         $scope.type = 'search';
         $scope.request = 'https://itunes.apple.com/' + $scope.type + '?';
         $scope.country = 'US';
+        $scope.lookupCountry = 'US';
         $scope.mediaTypes = ['all', 'movie', 'podcast', 'music', 'musicVideo', 'audiobook', 'shortFilm', 'tvShow', 'software', 'ebook'];
         $scope.media = '----';
         $scope.mediaEntities = {
@@ -121,6 +122,8 @@
                 $scope.request += ($scope.version !== '2') ? '&version=' + $scope.version : '';
                 $scope.request += ($scope.explicit !== 'Yes') ? '&explicit=' + $scope.explicit : '';
                 $scope.submitDisabled = !($scope.term && !isNaN($scope.limit)) ;
+                $scope.status = null;
+                $scope.data = null;
             } else {
                 $scope.request = 'https://itunes.apple.com/' + $scope.type + '?' + (($scope.id) ? 'id=' + $scope.id : '');
                 $scope.request += (($scope.upc) ? 'upc=' + $scope.upc : '');
@@ -128,7 +131,10 @@
                 $scope.request += (($scope.amgAlbumId) ? 'amgAlbumId=' + $scope.amgAlbumId : '');
                 $scope.request += (($scope.amgVideoId) ? 'amgVideoId=' + $scope.amgVideoId : '');
                 $scope.request += (($scope.isbn) ? 'isbn=' + $scope.isbn : '');
+                $scope.request += ($scope.lookupCountry && $scope.lookupCountry !== 'US') ? '&country=' + $scope.lookupCountry : '';
                 $scope.submitDisabled = !($scope.upc || $scope.id || $scope.amgArtistId || $scope.amgAlbumId || $scope.isbn || $scope.amgVideoId);
+                $scope.status = null;
+                $scope.data = null;
             }
 
         };

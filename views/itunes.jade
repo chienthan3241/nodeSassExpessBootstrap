@@ -301,6 +301,37 @@ block content
                                             button.btn.btn-default(type="button", data-dismiss="modal") Close
 
                         //Lookupoption ==================================================
+                        //country
+                        .form-group(ng-show="type=='lookup'")
+                            label.control-label.col-lg-2(for="country") Country(ISO):
+                            .col-lg-2
+                                input.form-control(type="text", id="lookupCountry", name="lookupCountry", ng-model="lookupCountry",
+                                placeholder="Country ISO", ng-change="change()")
+                            .col-lg-1
+                                .help-tip.pull-right(data-toggle="modal", data-target="#searchlookupCountry")
+                            .modal.fade(id="searchlookupCountry", tabindex="-1", role="dialog", aria-labelledby="searchlookupCountryLabel")
+                                .modal-dialog(role="document")
+                                    .modal-content
+                                        .modal-header
+                                            button.close(type="button", data-dismiss="modal", aria-label="Close")
+                                                span(aria-hidden="true") &times;
+                                            h4.modal-title(id="searchlookupCountryLabel") Country
+                                        hr
+                                        .modal-body
+                                            h5 Description
+                                            p.
+                                                The two-letter country code for the store you want to search.
+                                                The search uses the default store front for the specified country.
+                                                For example: US. The default is US.
+                                            h5 Required
+                                            p Y
+                                            h5 Values
+                                            p.
+                                                See #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO_3166-1_alpha-2]
+                                                for a list of ISO Country Codes.
+                                        .modal-footer
+                                            hr
+                                            button.btn.btn-default(type="button", data-dismiss="modal") Close
                         //Ids
                         .form-group(ng-show="type=='lookup'")
                             label.control-label.col-lg-2(for="id") IDs:
