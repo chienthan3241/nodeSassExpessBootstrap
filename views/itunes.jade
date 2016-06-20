@@ -9,7 +9,7 @@ block content
     .container-fluid.page_title2
         .container
             .col-md-12
-                h1 home
+                h1 ITUNES API
     .container(ng-controller="iTunesApi")
         .row
             .col-lg-12
@@ -376,15 +376,15 @@ block content
                             tr(ng-repeat="item in data.results")
                                 td {{item.wrapperType}}
                                 td {{item.kind}}
-                                td {{(item.artistId) ? item.artistId : ''}}
-                                td {{(item.collectionId) ? item.collectionId : ''}}
-                                td {{(item.trackId) ? item.trackId : ''}}
+                                td {{item.hasOwnProperty('artistId') ? item.artistId : ''}}
+                                td {{item.hasOwnProperty('collectionId') ? item.collectionId : ''}}
+                                td {{item.hasOwnProperty('trackId') ? item.trackId : ''}}
                                 td {{item.artistName}}
                                 td {{item.collectionName}}
                                 td {{item.trackName}}
                                 td
                                     div(ng-if="item.hasOwnProperty('artworkUrl100')") #[img(src="{{item.artworkUrl100}}")]
                                     div(ng-if="!item.hasOwnProperty('artworkUrl100')")
-                                td {{(item.releaseDate) ? item.releaseDate : ''}}
-                                td {{(item.country) ? item.country : ''}}
+                                td {{item.hasOwnProperty('releaseDate') ? item.releaseDate : ''}}
+                                td {{item.hasOwnProperty('country') ? item.country : ''}}
                                 td {{item.hasOwnProperty('isStreamable') ? item.isStreamable : ''}}
