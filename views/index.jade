@@ -30,3 +30,6 @@ block content
                 | {{alert.msg}}
                 a(ng-if="alert.hasOwnProperty('href2')", href="#") {{alert.href2}}
         button.btn.btn-default(ng-click="addAlert()") Add Alert
+
+block footer
+    include footer

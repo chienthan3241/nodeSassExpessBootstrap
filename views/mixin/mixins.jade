@@ -1,0 +1,22 @@
+//
+   Created by manh-cuong on 21.06.16.
+mixin modal(dataTarget, id, labelledby, header)
+    .col-lg-1
+        .help-tip.pull-right(data-toggle="modal", data-target=dataTarget)
+    .modal.fade(id=id, tabindex="-1", role="dialog", aria-labelledby=labelledby)
+        .modal-dialog(role="document")
+            .modal-content
+                .modal-header
+                    button.close(type="button", data-dismiss="modal", aria-label="Close")
+                        span(aria-hidden="true") &times;
+                    h4.modal-title(id=labelledby)= header
+                hr
+                .modal-body
+                    if block
+                        block
+
+mixin modalFooter
+    .modal-footer
+        hr
+        button.btn.btn-default(type="button", data-dismiss="modal") Close
+

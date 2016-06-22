@@ -1,0 +1,59 @@
+//
+   Created by manh-cuong on 22.06.16.
+script(type="text/ng-template" id="spotifyResultTable")
+    |{{directiveMode}}
+    table.table.table-hover.table-hover
+        thead
+            tr
+                th(ng-repeat="header in directiveHeaders") {{header}}
+        tbody
+            tr(ng-repeat="item in directiveData[directiveType].items", ng-if="directiveMode=='search'")
+                td(ng-repeat="field in directiveFields")
+                    div(ng-switch on="field")
+                        div(ng-switch-when="href").
+                            #[a(target='_blank', href="{{item.href}}") link]
+                        div(ng-switch-when="images").
+                            #[img(src="{{item.images[0].url}}", height='64', width='auto')]
+                        div(ng-switch-when="album_images").
+                            #[img(src="{{item.album.images[0].url}}", height='64', width='64')]
+                        div(ng-switch-when="album_name").
+                            {{item.album.name}}
+                        div(ng-switch-when="album_id").
+                            {{item.album.id}}
+                        div(ng-switch-when="artists_name").
+                            {{item.artists[0].name}}
+                        div(ng-switch-when="artists_id").
+                            {{item.artists[0].id}}
+                        div(ng-switch-when="track_total").
+                            {{item.tracks.total}}
+                        div(ng-switch-when="owner_id").
+                            {{item.owner.id}}
+                        div(ng-switch-when="external_urls").
+                            #[a(target='_blank', href="{{item.external_urls.spotify}}") spotify link]
+                        div(ng-switch-default).
+                            {{item[field]}}
+            tr(ng-repeat="item in directiveData[directiveType]", ng-if="directiveMode!='search'")
+                td(ng-repeat="field in directiveFields")
+                    div(ng-switch on="field")
+                        div(ng-switch-when="href").
+                            #[a(target='_blank', href="{{item.href}}") link]
+                        div(ng-switch-when="images").
+                            #[img(src="{{item.images[0].url}}", height='64', width='64')]
+                        div(ng-switch-when="album_images").
+                            #[img(src="{{item.album.images[0].url}}", height='64', width='64')]
+                        div(ng-switch-when="album_name").
+                            {{item.album.name}}
+                        div(ng-switch-when="album_id").
+                            {{item.album.id}}
+                        div(ng-switch-when="artists_name").
+                            {{item.artists[0].name}}
+                        div(ng-switch-when="artists_id").
+                            {{item.artists[0].id}}
+                        div(ng-switch-when="track_total").
+                            {{item.tracks.total}}
+                        div(ng-switch-when="owner_id").
+                            {{item.owner.id}}
+                        div(ng-switch-when="external_urls").
+                            #[a(target='_blank', href="{{item.external_urls.spotify}}") spotify link]
+                        div(ng-switch-default).
+                            {{item[field]}}

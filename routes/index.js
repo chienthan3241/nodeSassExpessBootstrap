@@ -16,4 +16,19 @@ router.get('/', function(req, res, next) {
   //res.render('index', { title: 'Express', results: [] });
 });
 
+// itunes api
+router.get('/itunes', function(req, res, next) {
+  res.render('itunes', { title: 'Itunes Api'});
+});
+
+//spotify api
+router.get('/spotify', function(req, res, next) {
+  res.render('spotify', { title: 'Spotify Api'});
+});
+
+//deezer api
+router.get('/deezer', function(req, res, next) {
+  res.render('deezer', { title: 'Deezer Api'});
+});
+
 module.exports = router;

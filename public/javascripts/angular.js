@@ -139,4 +139,86 @@
 
         };
     }]);
+    app.controller('spotifyApi', ['$scope', '$http', '$templateCache', function ($scope, $http, $templateCache) {
+        $scope.qtype = 'search';
+        $scope.type = 'album';
+        $scope.jsonRoot = 'albums';
+        $scope.market = '';
+        $scope.limit = 20;
+        $scope.offset = 0;
+        $scope.request = 'https://api.spotify.com/v1/search?';
+        $scope.submitDisabled = true;
+        $scope.multiArtist = false;
+        $scope.artistAlbum = false;
+
+        $scope.change = function() {
+            switch ($scope.qtype) {
+                case 'search':
+                    $scope.request = 'https://api.spotify.com/v1/' + $scope.qtype + '?';
+                    $scope.request += ($scope.q) ? 'q=' + $scope.q : '';
+                    $scope.request += '&type=' + $scope.type;
+                    $scope.request += ($scope.market) ? '&market=' + $scope.market : '';
+                    $scope.request += ($scope.limit && $scope.limit != 20) ? '&limit=' + $scope.limit : '';
+                    $scope.request += ($scope.offset && $scope.offset != 0) ? '&offset=' + $scope.offset : '';
+                    $scope.submitDisabled = !($scope.q && !isNaN($scope.limit) && !isNaN($scope.offset)) ;
+                    $scope.status = null;
+                    $scope.data = null;
+                    $scope.jsonRoot = $scope.type + 's';
+                    break;
+                case 'track':
+                    $scope.request = 'https://api.spotify.com/v1/tracks';
+                    $scope.request += ($scope.trackIds) ? '?ids=' + $scope.trackIds : '';
+                    $scope.request += ($scope.trackMarket) ? '&market=' + $scope.trackMarket : '';
+                    $scope.submitDisabled = !$scope.trackIds ;
+                    $scope.status = null;
+                    $scope.data = null;
+                    $scope.jsonRoot = 'tracks';
+                    break;
+                case 'artist':
+                    $scope.request = 'https://api.spotify.com/v1/artists';
+                    $scope.request += ($scope.multiArtist && $scope.artistIds) ? '?ids=' + $scope.artistIds : '';
+                    $scope.request += (!$scope.multiArtist && $scope.artistId) ? '/' + $scope.artistId : '';
+
+
+                    $scope.submitDisabled = !(($scope.multiArtist && $scope.artistIds) || (!$scope.multiArtist && $scope.artistId)) ;
+                    break;
+                default:
+                    break;
+            }
+
+        };
+        $scope.submit = function() {
+            $scope.code = null;
+            $scope.response = null;
+            $http({method: 'GET', url: $scope.request, cache: $templateCache}).
+            then(function(response) {
+                $scope.status = response.status;
+                $scope.data = response.data;
+            }, function(response) {
+                $scope.data = response.data || "Request failed";
+                $scope.status = response.status;
+            });
+        };
+        $scope.albumResultHeaders   = ['album_type', 'external_urls', 'href', 'album id', 'images', 'album name', 'type'];
+        $scope.albumResultfield     = ['album_type', 'external_urls', 'href', 'id', 'images', 'name', 'type'];
+        $scope.trackResultHeaders   = ['album name', 'album id', 'images', 'artist name', 'artist id', 'track id', 'track name', 'external_urls', 'popularity'];
+        $scope.trackResultfield     = ['album_name', 'album_id', 'album_images', 'artists_name', 'artists_id', 'id', 'name', 'external_urls', 'popularity'];
+        $scope.artistResultHeaders  = ['artist name', 'artist id', 'external_urls', 'href', 'images', 'popularity', 'type'];
+        $scope.artistResultfield    = ['name', 'id', 'external_urls', 'href', 'images', 'popularity', 'type'];
+        $scope.playlistResultHeaders  = ['external_urls', 'playlist id', 'images', 'playlist name', 'total tracks', 'owner id', 'type'];
+        $scope.playlistResultfield    = ['external_urls', 'id', 'images', 'name', 'track_total', 'owner_id', 'type'];
+    }]);
+    app.directive('spotifyResultTable', function() {
+        return {
+            restrict: 'E',
+            scope: {
+                directiveData: "=result",
+                directiveType: "=type",
+                directiveHeaders: "=headers",
+                directiveFields: "=fields",
+                directiveMode: "=mode"
+            },
+            templateUrl: 'spotifyResultTable'
+        };
+    });
 })(window.angular);
