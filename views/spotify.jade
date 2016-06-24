@@ -158,7 +158,7 @@ block content
                                     Provide this parameter if you want to apply
                                     #[a(target='_blank', href='https://developer.spotify.com/web-api/track-relinking-guide/') Track Relinking].
                                 +modalFooter
-                        //artist
+                        //artist==================================================
                         //multi IDs
                         .form-group(ng-show="qtype=='artist'")
                             label.control-label.col-lg-2(for="multiArtist") Multi Artist IDs(Y/N):
@@ -192,17 +192,17 @@ block content
                                     for the artists. Maximum: 50 IDs.
                                 +modalFooter
                         //artist's Albums
-                        .form-group(ng-show="qtype=='artist' && !multiArtist")
-                            label.control-label.col-lg-2(for="artistAlbum") Artist's Albums(Y/N):
+                        .form-group(ng-show="qtype=='artist' && !multiArtist && !artistTopTracks && !artistRelatedArtists")
+                            label.control-label.col-lg-2(for="artistAlbum") Get Artist's Albums:
                             .col-lg-2
                                 input(type="checkbox", id="artistAlbum", name="artistAlbum", ng-model="artistAlbum",
-                                ng-click="change()")
+                                ng-click="change(); artistTopTracks=false; artistRelatedArtists=false;")
                         //artist's Albums album_type
                         .form-group(ng-show="qtype=='artist' && !multiArtist && artistAlbum")
                             label.control-label.col-lg-2(for="artistAlbumType") album_type:
                             .col-lg-2
                                 select.form-control(id="artistAlbumType", name="artistAlbumType", ng-model="artistAlbumType",
-                                ng-change="change()", ng-init="artistAlbumType='----'")
+                                ng-change="change()")
                                     option(ng-repeat="type in ['----', 'album', 'single', 'appears_on', 'compilation']") {{type}}
                             +modal("#ModalartistAlbumType", "ModalartistAlbumType", 'ModalartistAlbumTypeLabel', 'album_type')
                                 h5 Description
@@ -211,7 +211,166 @@ block content
                                     If not supplied, all album types will be returned. Valid values are:
                                     #[br]#[br]#[li album]#[li single]#[li appears_on]#[li compilation]
                                 +modalFooter
+                        //artist's Albums album_type
+                        .form-group(ng-show="qtype=='artist' && !multiArtist && artistAlbum")
+                            label.control-label.col-lg-2(for="artistMarket") Market:
+                            .col-lg-2
+                                input.form-control(id="artistMarket", name="artistMarket", ng-model="artistMarket",
+                                placeholder="Country ISO", ng-change="change()")
+                            +modal('#modalartistMarket', 'modalartistMarket', 'modalartistMarketLabel', 'Market')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] An #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO 3166-1 alpha-2 country code]
+                                    Supply this parameter to limit the response to one particular geographical market.
+                                    For example, for albums available in Sweden: market=SE.
+                                    #[br]#[br]#[i If not given, results will be returned for all markets and you are likely to get duplicate results per album, one for each market in which the album is available!]
+                                +modalFooter
+                        //artist's Albums limit
+                        .form-group(ng-show="qtype=='artist' && !multiArtist && artistAlbum")
+                            label.control-label.col-lg-2(for="artistlimit") Limit:
+                            .col-lg-2(ng-class="(spotifyApi.artistlimit.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="number", id="artistlimit", name="artistlimit", ng-model="artistlimit",
+                                placeholder="limit", ng-change="change()", min="1", max="50")
+                            +modal("#artistLimit", "artistLimit", 'artistLimitLabel', 'Limit')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] The maximum number of results to return. Default: 20. Minimum: 1. Maximum: 50.
+                                +modalFooter
+                        //artist's Albums offset
+                        .form-group(ng-show="qtype=='artist' && !multiArtist && artistAlbum")
+                            label.control-label.col-lg-2(for="artistoffset") Offset:
+                            .col-lg-2(ng-class="(spotifyApi.artistoffset.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="number", id="artistoffset", name="artistoffset", ng-model="artistoffset",
+                                placeholder="offset", ng-change="change()", min="0", max="100000")
+                            +modal("#artistOffset", "artistOffset", 'artistOffsetLabel', 'Offset')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] The index of the first result to return. Default: 0
+                                    (i.e., the first album). Maximum offset: 100.000. Use with limit to get
+                                    the next page of albums.
+                                +modalFooter
+                        //artist's TopTracks
+                        .form-group(ng-show="qtype=='artist' && !multiArtist && !artistAlbum && !artistRelatedArtists")
+                            label.control-label.col-lg-2(for="artistTopTracks") Get Artist's TopTracks(10):
+                            .col-lg-2
+                                input(type="checkbox", id="artistTopTracks", name="artistTopTracks", ng-model="artistTopTracks",
+                                ng-click="change(); artistAlbum=false; artistRelatedArtists=false;")
+                        //artist's TopTracks country
+                        .form-group(ng-show="qtype=='artist' && !multiArtist && artistTopTracks")
+                            label.control-label.col-lg-2(for="artistTopTracksCountry") Country:
+                            .col-lg-2(ng-class="(spotifyApi.artistTopTracksCountry.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="text", id="artistTopTracksCountry", name="artistTopTracksCountry", ng-model="artistTopTracksCountry",
+                                placeholder="Country ISO", ng-change="change()", ng-required="qtype=='artist' && !multiArtist && artistTopTracks")
+                            +modal('#modalartistTopTracksCountry', 'modalartistTopTracksCountry', 'modalartistTopTracksCountryLabel', 'Country')
+                                h5 Description
+                                p.
+                                    #[i #[b Required.]] The country: an #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO 3166-1 alpha-2 country code]
+                                +modalFooter
+                        //artist releated artists
+                        .form-group(ng-show="qtype=='artist' && !multiArtist && !artistAlbum && !artistTopTracks")
+                            label.control-label.col-lg-2(for="artistRelatedArtists") Get Artist's Related Artists:
+                            .col-lg-2
+                                input(type="checkbox", id="artistRelatedArtists", name="artistRelatedArtists", ng-model="artistRelatedArtists",
+                                ng-click="change(); artistAlbum=false; artistTopTracks=false;")
 
+                        //album==================================================
+                        //multi IDs
+                        .form-group(ng-show="qtype=='album'")
+                            label.control-label.col-lg-2(for="multiAlbum") Multi Albums(Y/N):
+                            .col-lg-2
+                                input(type="checkbox", id="multiAlbum", name="multiAlbum", ng-model="multiAlbum",
+                                ng-click="change()")
+                        //ID
+                        .form-group(ng-show="qtype=='album' && !multiAlbum")
+                            label.control-label.col-lg-2(for="albumsId") ID:
+                            .col-lg-5(ng-class="(spotifyApi.albumsId.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(id='albumsId', name='albumsId', ng-model='albumsId',
+                                ng-required="qtype=='album' && !multiAlbum", placeholder='Album Id', ng-change="change()")
+                            +modal("#multiAlbumId", "multiAlbumId", 'multiAlbumIdLabel', 'Album ID')
+                                h5 Description
+                                p.
+                                    #[i #[b Required.]] The
+                                    #[a(target="_blank", href="https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids") Spotify ID]
+                                    for the Album.
+                                +modalFooter
+                        //IDs
+                        .form-group(ng-show="qtype=='album' && multiAlbum")
+                            label.control-label.col-lg-2(for="albumsIds") IDs:
+                            .col-lg-9(ng-class="(spotifyApi.albumsIds.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(id='albumsIds', name='albumsIds', ng-model='albumsIds',
+                                ng-required="qtype=='album' && multiAlbum", placeholder='Albums Ids', ng-change="change()")
+                            +modal("#ModalalbumsIds", "ModalalbumsIds", 'ModalalbumsIdsLabel', 'Album IDs')
+                                h5 Description
+                                p.
+                                    #[i #[b Required.]] A comma-separated list of the
+                                    #[a(target="_blank", href="https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids") Spotify IDs]
+                                    for the abums. Maximum: 20 IDs.
+                                +modalFooter
+                        //multi albums market
+                        .form-group(ng-show="qtype=='album' && multiAlbum")
+                            label.control-label.col-lg-2(for="multiAlbumTracksMarket") Market:
+                            .col-lg-2
+                                input.form-control(type="text", id="multiAlbumTracksMarket", name="multiAlbumTracksMarket", ng-model="multiAlbumTracksMarket",
+                                placeholder="Country ISO", ng-change="change()")
+                            +modal('#modalmultiAlbumTracksMarket', 'modalmultiAlbumTracksMarket', 'modalmultiAlbumTracksMarket', 'Market')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] An #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO 3166-1 alpha-2 country code]
+                                    Provide this parameter if you want to apply
+                                    #[a(target='_blank', href='https://developer.spotify.com/web-api/track-relinking-guide/') Track Relinking].
+                                +modalFooter
+                        //album get album tracks
+                        .form-group(ng-show="qtype=='album' && !multiAlbum")
+                            label.control-label.col-lg-2(for="albumTracks") Get Album's Tracks:
+                            .col-lg-2
+                                input(type="checkbox", id="albumTracks", name="albumTracks", ng-model="albumTracks",
+                                ng-click="change()")
+                        //album get album tracks limit
+                        .form-group(ng-show="qtype=='album' && !multiAlbum && albumTracks")
+                            label.control-label.col-lg-2(for="albumTrackslimit") Limit:
+                            .col-lg-2(ng-class="(spotifyApi.albumTrackslimit.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="number", id="albumTrackslimit", name="albumTrackslimit", ng-model="albumTrackslimit",
+                                placeholder="limit", ng-change="change()", min="1", max="50")
+                            +modal("#modalalbumTrackslimit", "modalalbumTrackslimit", 'modalalbumTrackslimitLabel', 'Limit')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] The maximum number of tracks to return. Default: 20. Minimum: 1. Maximum: 50.
+                                +modalFooter
+                        //album get album tracks offset
+                        .form-group(ng-show="qtype=='album' && !multiAlbum && albumTracks")
+                            label.control-label.col-lg-2(for="albumTracksOffset") Offset:
+                            .col-lg-2(ng-class="(spotifyApi.albumTracksOffset.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="number", id="albumTracksOffset", name="albumTracksOffset", ng-model="albumTracksOffset",
+                                placeholder="offset", ng-change="change()", min="0", max="100000")
+                            +modal("#ModalalbumTracksOffset", "ModalalbumTracksOffset", 'ModalalbumTracksOffsetLabel', 'Offset')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] The index of the first track to return. Default: 0
+                                    (i.e., the first album). Maximum offset: 100.000. Use with limit to get
+                                    the next set of tracks.
+                                +modalFooter
+                        //album get album's tracks market
+                        .form-group(ng-show="qtype=='album' && !multiAlbum && albumTracks")
+                            label.control-label.col-lg-2(for="albumTracksMarket") Market:
+                            .col-lg-2
+                                input.form-control(type="text", id="albumTracksMarket", name="albumTracksMarket", ng-model="albumTracksMarket",
+                                placeholder="Country ISO", ng-change="change()")
+                            +modal('#modalalbumTracksMarket', 'modalalbumTracksMarket', 'modalalbumTracksMarketLabel', 'Market')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] An #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO 3166-1 alpha-2 country code]
+                                    Provide this parameter if you want to apply
+                                    #[a(target='_blank', href='https://developer.spotify.com/web-api/track-relinking-guide/') Track Relinking].
+                                +modalFooter
+                        //Playlist
+                        //access Token
+                        .form-group(ng-show="qtype == 'playlist'")
+                            label.control-label.col-lg-2() Access Token:
+                            .col-lg-6(ng-class="(spotifyApi.playlistsAccessToken.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="text", id="playlistsAccessToken", name="playlistsAccessToken", ng-model="playlistsAccessToken",
+                                ng-required="qtype == 'playlist'")
+                            .col-lg-2
+                                button.btn.btn-sm.btn-info(ng-click="getToken()") get Token
                         //submit area ==================================================
                         br
                         pre {{request}}
@@ -226,23 +385,23 @@ block content
                         http status code: {{status}}
         //==============================================================================================================
         include AngularTemplate/spotifyResultTable
-        //search albums results
-        .row(ng-show="status != null && qtype == 'search' && type == 'album'")
+        //albums results
+        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'album') || (qtype == 'artist' && artistAlbum) || (qtype == 'album' && multiAlbum) || (qtype == 'album' && !multiAlbum && !albumTracks))")
             .col-lg-12
                 .well
-                    spotify-result-table(result="data", type="jsonRoot", mode="qtype", headers="albumResultHeaders", fields="albumResultfield")
-        //search Tracks results || track results
-        .row(ng-show="status != null && ((qtype == 'search' && type == 'track') || (qtype == 'track'))")
+                    spotify-result-table(result="data", headers="albumResultHeaders", fields="albumResultfield")
+        //Tracks results || track results
+        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'track') || (qtype == 'track') || (qtype == 'artist' && artistTopTracks) || (qtype == 'album' && !multiAlbum && albumTracks) )")
             .col-lg-12
                 .well
-                    spotify-result-table(result="data", type="jsonRoot",mode="qtype", headers="trackResultHeaders", fields="trackResultfield")
+                    spotify-result-table(result="data", headers="trackResultHeaders", fields="trackResultfield")
         //aritst results
-        .row(ng-show="status != null && qtype == 'search' && type == 'artist'")
+        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'artist') || (qtype == 'artist' && !artistAlbum && !artistTopTracks))")
             .col-lg-12
                 .well
-                    spotify-result-table(result="data", type="jsonRoot",mode="qtype", headers="artistResultHeaders", fields="artistResultfield")
+                    spotify-result-table(result="data", headers="artistResultHeaders", fields="artistResultfield")
         //playlist results
-        .row(ng-show="status != null && qtype == 'search' && type == 'playlist'")
+        .row(ng-show="status == '200' && (qtype == 'search' && type == 'playlist')")
             .col-lg-12
                 .well
-                    spotify-result-table(result="data", type="jsonRoot",mode="qtype", headers="playlistResultHeaders", fields="playlistResultfield")
+                    spotify-result-table(result="data", headers="playlistResultHeaders", fields="playlistResultfield")
