@@ -463,22 +463,22 @@ block content
         //==============================================================================================================
         include AngularTemplate/spotifyResultTable
         //albums results
-        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'album') || (qtype == 'artist' && artistAlbum) || (qtype == 'album' && multiAlbum) || (qtype == 'album' && !multiAlbum && !albumTracks))")
+        .row(ng-show="(status == '200') && ((qtype == 'search' && type == 'album') || (qtype == 'artist' && artistAlbum) || (qtype == 'album' && multiAlbum) || (qtype == 'album' && !multiAlbum && !albumTracks))")
             .col-lg-12
                 .well
                     spotify-result-table(result="data", headers="albumResultHeaders", fields="albumResultfield")
         //Tracks results || track results
-        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'track') || (qtype == 'track') || (qtype == 'artist' && artistTopTracks) || (qtype == 'album' && !multiAlbum && albumTracks) || (qtype == 'playlist' && playlistTracks))")
+        .row(ng-show="(status == '200') && ((qtype == 'search' && type == 'track') || (qtype == 'track') || (qtype == 'artist' && artistTopTracks) || (qtype == 'album' && !multiAlbum && albumTracks) || (qtype == 'playlist' && playlistTracks))")
             .col-lg-12
                 .well
                     spotify-result-table(result="data", headers="trackResultHeaders", fields="trackResultfield")
         //aritst results
-        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'artist') || (qtype == 'artist' && !artistAlbum && !artistTopTracks))")
+        .row(ng-show="(status == '200') && ((qtype == 'search' && type == 'artist') || (qtype == 'artist' && !artistAlbum && !artistTopTracks))")
             .col-lg-12
                 .well
                     spotify-result-table(result="data", headers="artistResultHeaders", fields="artistResultfield")
         //playlist results
-        .row(ng-show="(status == '200' || status == '304') && ((qtype == 'search' && type == 'playlist') || (qtype == 'playlist' && !playlistTracks))")
+        .row(ng-show="(status == '200') && ((qtype == 'search' && type == 'playlist') || (qtype == 'playlist' && !playlistTracks))")
             .col-lg-12
                 .well
                     spotify-result-table(result="data", headers="playlistResultHeaders", fields="playlistResultfield")
