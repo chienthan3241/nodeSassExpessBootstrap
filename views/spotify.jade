@@ -370,7 +370,7 @@ block content
                                 input.form-control(type="text", id="playlistsAccessToken", name="playlistsAccessToken", ng-model="playlistsAccessToken",
                                 ng-required="qtype == 'playlist'", ng-change="change()")
                             .col-lg-2
-                                a.btn.btn-sm.btn-info(href="https://accounts.spotify.com/authorize?client_id=aa534da9eceb4a34b628cd77078760ee&response_type=token&redirect_uri=http://localhost:3000/spotify/") get Token
+                                a.btn.btn-sm.btn-info(href="https://accounts.spotify.com/authorize?client_id=aa534da9eceb4a34b628cd77078760ee&response_type=token&redirect_uri=https://nodeexpressmongoangular.herokuapp.com/spotify/") get Token
                         //user ID
                         .form-group(ng-show="qtype == 'playlist'")
                             label.control-label.col-lg-2(for="playlistUserId") User ID:
