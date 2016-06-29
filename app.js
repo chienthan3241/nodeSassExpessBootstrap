@@ -4,6 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var _ = require('lodash');
+var request = require('request');
+var urli = require('url');
+
 //mongoose
 var mongoose = require('mongoose');
 
@@ -30,6 +34,24 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
+//user proxy request to avoid cors http request
+app.use('/corsproxy', function(req, res) {
+        var url = 'https://api.spotify.com/v1/users/';
+        var params = urli.parse(req.url, true).query;
+        var accessToken = 'Bearer ' + params.token;
+        url += params.users + '/playlists/';
+        url += params.playlists;
+        if (_.has(params, 'playlisttracks') && _.toLower(_.get(params, 'playlisttracks')) === 'y') {
+          url += '/tracks';
+        }
+        url += '?';
+        url += (_.has(params, 'market')) ? 'market=' + params.market + '&' : '';
+        url += (_.has(params, 'limit')) ? 'limit=' + params.limit + '&' : '';
+        url += (_.has(params, 'offset')) ? 'offset=' + params.offset + '&' : '';
+        url = _.trimEnd(url, '&');
+        url = _.trimEnd(url, '?');
+        req.pipe(request({url: url, headers: {Authorization: accessToken}})).pipe(res);
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

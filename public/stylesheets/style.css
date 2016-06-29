@@ -515,7 +515,7 @@ body {
           position: relative;
           width: 50px;
           height: 51px;
-          background: url(http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/light-skin-1.png) no-repeat -14px -150px;
+          background: url("/images/sliderImg/bg/light-skin-1.png") no-repeat -14px -150px;
           top: 50%;
           left: 50%;
           margin: -25px 0 0 -25px;
@@ -597,7 +597,7 @@ body {
         display: table-cell;
         width: 10px;
         height: 10px;
-        background: url(http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/light-skin-1.png) no-repeat;
+        background: url("/images/sliderImg/bg/light-skin-1.png") no-repeat;
         background-position: -34px -117px;
         cursor: pointer; }
       .header-box-container .bullet-container .bullet-row .ms-bullet-selected {
@@ -606,7 +606,7 @@ body {
     position: absolute;
     width: 30px;
     height: 40px;
-    background: url(http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/light-skin-1.png) no-repeat;
+    background: url("/images/sliderImg/bg/light-skin-1.png") no-repeat;
     background-position: -89px -103px;
     cursor: pointer;
     left: 98%;
@@ -617,7 +617,7 @@ body {
     position: absolute;
     width: 30px;
     height: 40px;
-    background: url(http://i1098.photobucket.com/albums/g370/Hopla_Hopli/web/light-skin-1.png) no-repeat;
+    background: url("/images/sliderImg/bg/light-skin-1.png") no-repeat;
     background-position: -89px -26px;
     cursor: pointer;
     left: 2%;
@@ -647,7 +647,7 @@ body {
   float: left;
   padding: 40px 0;
   width: 100%;
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   border-bottom-style: solid;
   border-width: 1px; }
   .page_title2 h1 {
@@ -716,3 +716,21 @@ img#footerlogo:hover {
   filter: none;
   -webkit-filter: grayscale(0);
   transition: all 0.5s; }
+
+.help-tip {
+  position: relative;
+  top: 10px;
+  right: 0px;
+  text-align: center;
+  background-color: #2196f3;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 14px;
+  line-height: 26px;
+  cursor: default; }
+
+.help-tip:before {
+  content: '?';
+  font-weight: bold;
+  color: #fff; }
