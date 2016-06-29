@@ -306,7 +306,7 @@
                     if (_.has($scope.data, 'items')) {
                         $scope.data = $scope.data.items;
                         flag = false;
-                        if ($scope.qtype && $scope.playlistTracks) {
+                        if ($scope.qtype == 'playlist' && $scope.playlistTracks) {
                             _($scope.data).forEach(function (val) {
                                 temp.push(val.track);
                             });
