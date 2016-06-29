@@ -279,7 +279,8 @@
                     $scope.submitDisabled = !($scope.playlistsAccessToken && $scope.playlistUserId && $scope.playlistId &&
                         ((!$scope.playlistTracks) || ($scope.playlistTracks && !isNaN($scope.playlistTrackLimit) && !isNaN($scope.playlistTracksOffset)))
                     );
-
+                    $scope.status = null;
+                    $scope.data = null;
                     break;
             }
 
