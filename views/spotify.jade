@@ -312,7 +312,7 @@ block content
                             .col-lg-2
                                 input.form-control(type="text", id="multiAlbumTracksMarket", name="multiAlbumTracksMarket", ng-model="multiAlbumTracksMarket",
                                 placeholder="Country ISO", ng-change="change()")
-                            +modal('#modalmultiAlbumTracksMarket', 'modalmultiAlbumTracksMarket', 'modalmultiAlbumTracksMarket', 'Market')
+                            +modal('#modalmultiAlbumTracksMarket', 'modalmultiAlbumTracksMarket', 'modalmultiAlbumTracksMarketLabel', 'Market')
                                 h5 Description
                                 p.
                                     #[i #[b Optional.]] An #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO 3166-1 alpha-2 country code]
@@ -365,12 +365,89 @@ block content
                         //Playlist
                         //access Token
                         .form-group(ng-show="qtype == 'playlist'")
-                            label.control-label.col-lg-2() Access Token:
-                            .col-lg-6(ng-class="(spotifyApi.playlistsAccessToken.$invalid) ? 'has-error' : 'has-success'")
+                            label.control-label.col-lg-2(for="playlistsAccessToken") Access Token:
+                            .col-lg-8(ng-class="(spotifyApi.playlistsAccessToken.$invalid) ? 'has-error' : 'has-success'")
                                 input.form-control(type="text", id="playlistsAccessToken", name="playlistsAccessToken", ng-model="playlistsAccessToken",
-                                ng-required="qtype == 'playlist'")
+                                ng-required="qtype == 'playlist'", ng-change="change()")
                             .col-lg-2
-                                button.btn.btn-sm.btn-info(ng-click="getToken()") get Token
+                                a.btn.btn-sm.btn-info(href="https://accounts.spotify.com/authorize?client_id=aa534da9eceb4a34b628cd77078760ee&response_type=token&redirect_uri=http://localhost:3000/spotify/") get Token
+                        //user ID
+                        .form-group(ng-show="qtype == 'playlist'")
+                            label.control-label.col-lg-2(for="playlistUserId") User ID:
+                            .col-lg-4(ng-class="(spotifyApi.playlistUserId.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="text", id="playlistUserId", name="playlistUserId", ng-model="playlistUserId",
+                                ng-required="qtype == 'playlist'", ng-change="change()")
+                            +modal('#modalplaylistUserId', 'modalplaylistUserId', 'modalplaylistUserIdLabel', 'User ID')
+                                h5 Description
+                                p.
+                                    #[i #[b Required.]] The user's #[a(target="_blank", href="https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids") Spotify user ID].
+                                +modalFooter
+                        //playlist ID
+                        .form-group(ng-show="qtype == 'playlist'")
+                            label.control-label.col-lg-2(for="playlistId") Playlist ID:
+                            .col-lg-4(ng-class="(spotifyApi.playlistId.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="text", id="playlistId", name="playlistId", ng-model="playlistId",
+                                ng-required="qtype == 'playlist'", ng-change="change()")
+                            +modal('#modalplaylistId', 'modalplaylistId', 'modalplaylistIdLabel', 'Playlist ID')
+                                h5 Description
+                                p.
+                                    #[i #[b Required.]] The #[a(target="_blank", href="https://developer.spotify.com/web-api/user-guide/#spotify-uris-and-ids") Spotify ID]
+                                    for the playlist.
+                                +modalFooter
+                        //playlist market
+                        .form-group(ng-show="qtype=='playlist' && !playlistTracks")
+                            label.control-label.col-lg-2(for="playlistMarket") Market:
+                            .col-lg-2
+                                input.form-control(type="text", id="playlistMarket", name="playlistMarket", ng-model="playlistMarket",
+                                placeholder="Country ISO", ng-change="change()")
+                            +modal('#modalplaylistMarket', 'modalplaylistMarket', 'modalplaylistMarketLabel', 'Market')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] An #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO 3166-1 alpha-2 country code]
+                                    Provide this parameter if you want to apply
+                                    #[a(target='_blank', href='https://developer.spotify.com/web-api/track-relinking-guide/') Track Relinking].
+                                +modalFooter
+                        //multi IDs
+                        .form-group(ng-show="qtype=='playlist'")
+                            label.control-label.col-lg-2(for="playlistTracks") Get playlist's Tracks:
+                            .col-lg-2
+                                input(type="checkbox", id="playlistTracks", name="playlistTracks", ng-model="playlistTracks",
+                                ng-click="change()")
+                        //limit
+                        .form-group(ng-show="qtype=='playlist' && playlistTracks")
+                            label.control-label.col-lg-2(for="playlistTrackLimit") Limit:
+                            .col-lg-2(ng-class="(spotifyApi.playlistTrackLimit.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="number", id="playlistTrackLimit", name="playlistTrackLimit", ng-model="playlistTrackLimit",
+                                placeholder="limit", ng-change="change()", min="1", max="100")
+                            +modal("#ModalplaylistTrackLimit", "ModalplaylistTrackLimit", 'ModalplaylistTrackLimitLabel', 'Limit')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] The maximum number of tracks to return. Default: 100. Minimum: 1. Maximum: 100.
+                                +modalFooter
+                        //offset
+                        .form-group(ng-show="qtype=='playlist' && playlistTracks")
+                            label.control-label.col-lg-2(for="playlistTracksOffset") Offset:
+                            .col-lg-2(ng-class="(spotifyApi.playlistTracksOffset.$invalid) ? 'has-error' : 'has-success'")
+                                input.form-control(type="number", id="playlistTracksOffset", name="playlistTracksOffset", ng-model="playlistTracksOffset",
+                                placeholder="offset", ng-change="change()", min="0")
+                            +modal("#ModalplaylistTracksOffset", "ModalplaylistTracksOffset", 'ModalplaylistTracksOffsetLabel', 'Offset')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] The index of the first tracks to return. Default: 0(the first object)
+                                +modalFooter
+                        //playlist track market
+                        .form-group(ng-show="qtype=='playlist' && playlistTracks")
+                            label.control-label.col-lg-2(for="playlistTrackMarket") Market:
+                            .col-lg-2
+                                input.form-control(type="text", id="playlistTrackMarket", name="playlistTrackMarket", ng-model="playlistTrackMarket",
+                                placeholder="Country ISO", ng-change="change()")
+                            +modal('#modalplaylistTrackMarket', 'modalplaylistTrackMarket', 'modalplaylistTrackMarketLabel', 'Market')
+                                h5 Description
+                                p.
+                                    #[i #[b Optional.]] An #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO 3166-1 alpha-2 country code]
+                                    Provide this parameter if you want to apply
+                                    #[a(target='_blank', href='https://developer.spotify.com/web-api/track-relinking-guide/') Track Relinking].
+                                +modalFooter
                         //submit area ==================================================
                         br
                         pre {{request}}
@@ -391,7 +468,7 @@ block content
                 .well
                     spotify-result-table(result="data", headers="albumResultHeaders", fields="albumResultfield")
         //Tracks results || track results
-        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'track') || (qtype == 'track') || (qtype == 'artist' && artistTopTracks) || (qtype == 'album' && !multiAlbum && albumTracks) )")
+        .row(ng-show="status == '200' && ((qtype == 'search' && type == 'track') || (qtype == 'track') || (qtype == 'artist' && artistTopTracks) || (qtype == 'album' && !multiAlbum && albumTracks) || (qtype == 'playlist' && playlistTracks))")
             .col-lg-12
                 .well
                     spotify-result-table(result="data", headers="trackResultHeaders", fields="trackResultfield")
@@ -401,7 +478,7 @@ block content
                 .well
                     spotify-result-table(result="data", headers="artistResultHeaders", fields="artistResultfield")
         //playlist results
-        .row(ng-show="status == '200' && (qtype == 'search' && type == 'playlist')")
+        .row(ng-show="(status == '200' || status == '304') && ((qtype == 'search' && type == 'playlist') || (qtype == 'playlist' && !playlistTracks))")
             .col-lg-12
                 .well
                     spotify-result-table(result="data", headers="playlistResultHeaders", fields="playlistResultfield")

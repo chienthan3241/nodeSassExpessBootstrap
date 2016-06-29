@@ -1,6 +1,11 @@
 (function(angular) {
     'use strict';
     var app = angular.module('app', []);
+    app.config(['$httpProvider', function($httpProvider) {
+        $httpProvider.defaults.useXDomain = true;
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    }
+    ]);
     app.controller('AlertDemoCtrl', ['$scope', function ($scope) {
         $scope.alerts = [
             { type: 'alert-danger', msg: 'and try submitting again.', strong: 'Oh snap! ',  col: '3' },
@@ -139,7 +144,7 @@
 
         };
     }]);
-    app.controller('spotifyApi', ['$scope', '$http', '$templateCache', function ($scope, $http, $templateCache) {
+    app.controller('spotifyApi', ['$scope', '$http', '$templateCache', '$location', '$window', function ($scope, $http, $templateCache, $location, $window) {
         var jsonRoot = ['tracks', 'albums', 'artists', 'playlists'];
         $scope.qtype = 'search';
         $scope.type = 'album';
@@ -162,6 +167,22 @@
         $scope.albumTrackslimit = 20;
         $scope.albumTracksOffset = 0;
         $scope.token = '';
+        // parse token and reset url
+        var location = $location.path().replace('/', '').split('&');
+        var params = {}, temp;
+        _(location).forEach (function (value) {
+            temp = value.split('=');
+            params[temp[0]] = temp[1];
+        });
+
+        if (_.has(params, 'access_token') && _.has(params, 'token_type')) {
+            $scope.qtype = 'playlist';
+            $scope.playlistsAccessToken = _.get(params, 'access_token', '');
+            $location.path('');
+        }
+        $scope.playlistTracks = false;
+        $scope.playlistTrackLimit = 100;
+        $scope.playlistTracksOffset = 0;
         //reaction when user make some change on UI + built Request form
         $scope.change = function() {
             switch ($scope.qtype) {
@@ -240,6 +261,26 @@
                     $scope.status = null;
                     $scope.data = null;
                     break;
+                case 'playlist':
+                    //$scope.request = '/corsproxy/';
+                    //redirect to proxy to prevent cors pre-flight request
+                    $scope.request = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/corsproxy?';
+                    $scope.request += 'token=' + $scope.playlistsAccessToken + '&';
+                        //'https://api.spotify.com/v1';cors_server_proxy
+                    $scope.request += ($scope.playlistUserId) ? 'users=' + $scope.playlistUserId + '&' : '';
+                    $scope.request += ($scope.playlistId) ? 'playlists=' + $scope.playlistId + '&' : '';
+                    $scope.request += (!$scope.playlistTracks && $scope.playlistMarket) ? 'market=' + $scope.playlistMarket + '&' : '';
+                    $scope.request += ($scope.playlistTracks) ? 'playlisttracks=y&' : '';
+                    $scope.request += ($scope.playlistTracks && $scope.playlistTrackLimit && $scope.playlistTrackLimit != 100) ? 'limit=' + $scope.playlistTrackLimit + '&' : '';
+                    $scope.request += ($scope.playlistTracks && $scope.playlistTracksOffset && $scope.playlistTracksOffset != 0) ? 'offset=' + $scope.playlistTracksOffset + '&' : '';
+                    $scope.request += ($scope.playlistTracks && $scope.playlistTrackMarket) ? 'market=' + $scope.playlistTrackMarket + '&' : '';
+                    $scope.request = _.trimEnd($scope.request, '&');
+                    $scope.request = _.trimEnd($scope.request, '?');
+                    $scope.submitDisabled = !($scope.playlistsAccessToken && $scope.playlistUserId && $scope.playlistId &&
+                        ((!$scope.playlistTracks) || ($scope.playlistTracks && !isNaN($scope.playlistTrackLimit) && !isNaN($scope.playlistTracksOffset)))
+                    );
+
+                    break;
             }
 
         };
@@ -249,11 +290,12 @@
             $scope.response = null;
             $http({method: 'GET', url: $scope.request, cache: $templateCache}).
             then(
-                function(response) {
+                function (response) {
                     $scope.status = response.status;
                     $scope.data = response.data;
                     //manipulation data cause the variation of result format
                     var flag = true;
+                    var temp = [];
                     _(jsonRoot).forEach(function (val) {
                         if (_.has($scope.data, val) && flag && _.size($scope.data) === 1) {
                             $scope.data = $scope.data[val];
@@ -263,44 +305,22 @@
                     if (_.has($scope.data, 'items')) {
                         $scope.data = $scope.data.items;
                         flag = false;
+                        if ($scope.qtype && $scope.playlistTracks) {
+                            _($scope.data).forEach(function (val) {
+                                temp.push(val.track);
+                            });
+                            $scope.data = temp;
+                        }
                     }
                     if (flag) {
                         $scope.data = [$scope.data];
                     }
 
-                }, function(response) {
+                }, function (response) {
                     $scope.data = response.data || "Request failed";
                     $scope.status = response.status;
                 }
             );
-        };
-
-        //function to get Client Credentials from spotify
-        $scope.getToken = function() {
-            //$http({
-            //    method: 'POST',
-            //    url: 'https://accounts.spotify.com/api/token',
-            //    data: 'grant_type=client_credentials',
-            //    headers: 'Authorization: Basic YWE1MzRkYTllY2ViNGEzNGI2MjhjZDc3MDc4NzYwZWU6N2JhNWNhYzJmYzYxNGQ4Njk5OTYwYjU4OTM5Njk3Zjk='
-            //}).
-            //then(
-            //    function(response) {
-            //        $scope.token = response.access_token;
-            //    },
-            //    function(response) {
-            //        $scope.token = 'failed to get Token!!';
-            //    }
-            //);
-            $http.post('https://accounts.spotify.com/api/token', {grant_type: 'client_credentials'},
-                {headers: ['Authorization: Basic YWE1MzRkYTllY2ViNGEzNGI2MjhjZDc3MDc4NzYwZWU6N2JhNWNhYzJmYzYxNGQ4Njk5OTYwYjU4OTM5Njk3Zjk=',
-                    'Access-Control-Allow-Origin: *']}
-            )
-            .success(function (data, status, headers, config) {
-                $scope.token = data.access_token;
-            })
-            .error(function (data, status, header, config) {
-                $scope.token = 'failed to get Token!!';
-            });
         };
 
         // results display
