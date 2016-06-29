@@ -1,10 +1,10 @@
 nav.navbar.navbar-default.navbar-fixed-top
-    .container
+    .container-fluid
         .navbar-header
-            button.navbar-toggle.collapse(type='button', data-toggle='collapse', data-target="#navbar")
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target="#navbar", aria-expanded="false")
                 span.sr-only Toggle navigation
-                - for (var x = 0; x < 4; x++)
-                span.icon-bar
+                each n in [1,2,3]
+                    span.icon-bar
             a.navbar-brand(href='#')
                 img(src='/images/McGill_Wordmark.svg', style="max-width:100px")
         #navbar.collapse.navbar-collapse
