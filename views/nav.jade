@@ -3,29 +3,37 @@ nav.navbar.navbar-default.navbar-fixed-top
         .navbar-header
             button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target="#navbar", aria-expanded="false")
                 span.sr-only Toggle navigation
-                each n in [1,2,3]
-                    span.icon-bar
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
             a.navbar-brand(href='#')
                 img(src='/images/McGill_Wordmark.svg', style="max-width:100px")
         #navbar.collapse.navbar-collapse
             ul.nav.navbar-nav
-                each val in [{name: 'Home', href: '/', class: 'active'}, {name: 'Link', href: '/users', class: ''}]
-                    li(class=val.class)
-                        a(href=val.href)= val.name
-                        if val.class === 'active'
-                            span.sr-only (current)
-                li.dropdown
-                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false') Dropdown
+                li(class=navHome)
+                    a(href='/') Home
+                    if navHome == 'active'
+                        span.sr-only (current)
+                li(class=navLink)
+                    a(href='users') Link
+                    if navLink == 'active'
+                        span.sr-only (current)
+                li.dropdown(class=navDrop)
+                    a.dropdown-toggle(href='#', data-toggle='dropdown', role='button', aria-expanded='false', ng-click="home=false;link=false;dropdown=true;") Dropdown
                         span.caret
                     ul.dropdown-menu(role='menu')
-                        each val in [{name: 'Itunes Api', href: '/itunes', class: ''}, {name: 'Spotify Api', href: '/spotify', class: ''}, {name: 'Deezer Api', href: '/deezer', class: ''}]
-                            li
-                                a(class=val.class, href=val.href)= val.name
+                        li
+                            a(href="/itunes") Itunes Api
+                        li
+                            a(href="/spotify") Spotify Api
+                        li
+                            a(href="/deezer") Deezer Api
                         li.divider
                         li.dropdown-header Nav Header
-                        each val in [{name: 'Separated Link', href: '#', class: ''}, {name: 'One more separated link', href: '#', class: ''}]
-                            li
-                                a(href=val.href, class=val.class)= val.name
+                        li
+                            a(href="#") Separated Link
+                        li
+                            a(href="#") One more separated link
             form.navbar-form.navbar-left(role='search')
                 div.form-group
                     input.form-control(type='text', placeholder='Search')

@@ -8,7 +8,7 @@ router.get('/name/:name', function(req, res, next) {
         if(err) {
             res.send('no user in db');
         } else {
-            res.render('users', {title: 'Users Management', results: user});
+            res.render('users', {title: 'Users Management', results: user,  navLink: 'active'});
         }
     });
 });
@@ -20,7 +20,7 @@ router.get('/', function(req, res, next) {
         if(err) {
             res.send('no user in db');
         } else {
-            res.render('users', {title: 'Users Management', results: users});
+            res.render('users', {title: 'Users Management', results: users, navLink: 'active'});
         }
     });
 });

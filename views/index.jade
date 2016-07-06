@@ -8,28 +8,38 @@ block content
         .container
             .col-md-12
                 h1 home
+    .clearfix
     .container
-        table.table.table-striped.table-hover
-            thead
-                tr
-                    th id
-                    th name
-                    th email
-            tbody
-                each key in results
-                    tr
-                        td #{key._id}
-                        td #{key.name}
-                        td #{key.email}
+        .panel.panel-default
+            .panel-heading.
+                example mongo datas
+            .panel-body
+                table.table.table-striped.table-hover
+                    thead
+                        tr
+                            th id
+                            th name
+                            th email
+                    tbody
+                        each key in results
+                            tr
+                                td #{key._id}
+                                td #{key.name}
+                                td #{key.email}
+    .clearfix
     .container(ng-controller="AlertDemoCtrl")
-        div.row(ng-repeat="alert in alerts")
-            .alert.alert-dismissible(class="{{alert.type}}", class="col-md-{{alert.col}}")
-                button(type="button", class="close", data-dismiss="alert") x
-                strong(ng-if="alert.hasOwnProperty('strong')") {{alert.strong}}
-                a(ng-if="alert.hasOwnProperty('href1')", href="#") {{alert.href1}}
-                | {{alert.msg}}
-                a(ng-if="alert.hasOwnProperty('href2')", href="#") {{alert.href2}}
-        button.btn.btn-default(ng-click="addAlert()") Add Alert
-
+        .panel.panel-default
+            .panel-heading.
+                example angular
+            .panel-body
+                div.row(ng-repeat="alert in alerts")
+                    .alert.alert-dismissible(class="{{alert.type}}", class="col-md-{{alert.col}}")
+                        button(type="button", class="close", data-dismiss="alert") x
+                        strong(ng-if="alert.hasOwnProperty('strong')") {{alert.strong}}
+                        a(ng-if="alert.hasOwnProperty('href1')", href="#") {{alert.href1}}
+                        | {{alert.msg}}
+                        a(ng-if="alert.hasOwnProperty('href2')", href="#") {{alert.href2}}
+                button.btn.btn-default(ng-click="addAlert()") Add Alert
+    .clearfix
 block footer
     include footer

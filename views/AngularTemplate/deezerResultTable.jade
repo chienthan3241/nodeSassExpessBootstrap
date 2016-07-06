@@ -1,0 +1,35 @@
+//
+   Created by manh-cuong on 01.07.16.
+script(type="text/ng-template" id="deezerResultTable")
+    table.table.table-hover.table-hover
+        thead
+            tr
+                th(ng-repeat="header in directiveFields") {{header}}
+        tbody
+            tr(ng-repeat="item in directiveData")
+                td(ng-repeat="field in directiveFields")
+                    div(ng-switch on="field")
+                        div(ng-switch-when="link").
+                            #[a(target='_blank', href="{{item.link}}") link]
+                        div(ng-switch-when="cover").
+                            #[img(src="{{item.cover}}", height='64', width='auto')]
+                        div(ng-switch-when="picture").
+                            #[img(src="{{item.picture}}", height='64', width='auto')]
+                        div(ng-switch-when="artist_picture").
+                            #[img(src="{{item.artist.picture}}", height='64', width='auto')]
+                        div(ng-switch-when="album_cover").
+                            #[img(src="{{item.album.cover}}", height='64', width='auto')]
+                        div(ng-switch-when="artist_id").
+                            {{item.artist.id}}
+                        div(ng-switch-when="artist_name").
+                            {{item.artist.name}}
+                        div(ng-switch-when="album_id").
+                            {{item.album.id}}
+                        div(ng-switch-when="album_title").
+                            {{item.album.title}}
+                        div(ng-switch-when="user_id").
+                            {{item.user.id}}
+                        div(ng-switch-when="user_name").
+                            {{item.user.name}}
+                        div(ng-switch-default).
+                            {{item[field]}}

@@ -144,7 +144,7 @@
 
         };
     }]);
-    app.controller('spotifyApi', ['$scope', '$http', '$templateCache', '$location', '$window', function ($scope, $http, $templateCache, $location, $window) {
+    app.controller('spotifyApi', ['$scope', '$http', '$templateCache', '$location', function ($scope, $http, $templateCache, $location) {
         var jsonRoot = ['tracks', 'albums', 'artists', 'playlists'];
         $scope.qtype = 'search';
         $scope.type = 'album';
@@ -264,7 +264,7 @@
                 case 'playlist':
                     //$scope.request = '/corsproxy/';
                     //redirect to proxy to prevent cors pre-flight request
-                    $scope.request = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/corsproxy?';
+                    $scope.request = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/corsproxyspotify?';
                     $scope.request += 'token=' + $scope.playlistsAccessToken + '&';
                         //'https://api.spotify.com/v1';cors_server_proxy
                     $scope.request += ($scope.playlistUserId) ? 'users=' + $scope.playlistUserId + '&' : '';
@@ -346,4 +346,142 @@
             templateUrl: 'spotifyResultTable'
         };
     });
+    app.controller('deezerApi', ['$scope', '$http', '$templateCache', '$location', function ($scope, $http, $templateCache, $location) {
+        $scope.orderArray = ['RANKING', 'TRACK_ASC', 'TRACK_DESC', 'ARTIST_ASC',
+            'ARTIST_DESC', 'ALBUM_ASC', 'ALBUM_DESC', 'RATING_ASC', 'RATING_DESC', 'DURATION_ASC', 'DURATION_DESC'];
+        $scope.qtype = 'search';
+        $scope.ctype = 'tracks';
+        $scope.type = 'track';
+        $scope.fuzzy = false;
+        $scope.getTracks = false;
+        $scope.order = '----';
+        $scope.status = null;
+        $scope.data = null;
+        $scope.index = 0;
+        $scope.limit = null;
+        $scope.submitDisabled = true;
+        $scope.corsrequest = '';
+
+        $scope.change = function() {
+
+            $scope.request = 'https://api.deezer.com/' + $scope.qtype;
+            if ($scope.qtype != 'chart') {
+                if ($scope.qtype == 'search') {
+                    $scope.request += '/' + $scope.type;
+                    $scope.request += '?q=' + $scope.q + '&';
+                    $scope.request += ($scope.fuzzy) ? 'strict=on&' : '';
+                    $scope.request += ($scope.order !== '----') ? 'order=' + $scope.order + '&' : ''
+                } else {
+                    $scope.request += '/' + $scope.q;
+                    if (($scope.qtype == 'album' || $scope.qtype == 'playlist') && $scope.getTracks) {
+
+                    }
+                    $scope.request += '/tracks' + '?';
+                }
+            } else {
+                $scope.request += '?';
+            }
+
+            if ($scope.index && $scope.index != null && $scope.index != 0) {
+                $scope.request += 'index=' + $scope.index + '&';
+            }
+            if ($scope.limit && $scope.limit != null) {
+                $scope.request += 'limit=' + $scope.limit + '&';
+            }
+
+            $scope.request += 'output=json';
+            //proxy request
+            //redirect to proxy to prevent cors request
+            $scope.corsrequest  =  $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/corsproxydeezer?qtype=' + $scope.qtype + '&';
+            if ($scope.qtype != 'chart') {
+                $scope.corsrequest += 'q=' + $scope.q + '&';
+                if ($scope.qtype == 'search') {
+                    $scope.corsrequest += 'type=' + $scope.type + '&';
+                    $scope.corsrequest += ($scope.fuzzy) ? 'fuzzy=on&' : '';
+                    $scope.corsrequest += ($scope.order !== '----') ? 'order=' + $scope.order + '&' : ''
+                }
+            }
+            if ($scope.index && $scope.index != null && $scope.index != 0 ) {
+                $scope.corsrequest += 'index=' + $scope.index + '&';
+            }
+            if ($scope.limit && $scope.limit != null) {
+                $scope.corsrequest += 'limit=' + $scope.limit + '&';
+            }
+            $scope.corsrequest = _.trimEnd(_.trimEnd($scope.corsrequest, '&'), '?');
+
+            $scope.submitDisabled = !(($scope.q && !isNaN($scope.index) && !isNaN($scope.limit)) || $scope.qtype === 'chart');
+            $scope.status = null;
+            $scope.data = null;
+        };
+
+        $scope.submit = function () {
+            $scope.code = null;
+            $scope.response = null;
+            $http({method: 'GET', url: $scope.corsrequest, cache: $templateCache}).
+            then(function(response) {
+                $scope.status = response.status;
+                $scope.data = response.data;
+                //manipulation data cause the variation of result format
+                if ($scope.qtype == 'chart') {
+                    $scope.data = response.data;
+                } else if ($scope.qtype == 'search') {
+                    $scope.data = _.get($scope.data, 'data');
+                } else if (($scope.qtype == 'album' || $scope.qtype == 'playlist') && $scope.getTracks) {
+                    $scope.data = _.get($scope.data, 'tracks.data');
+                } else {
+                    $scope.data = [$scope.data];
+                }
+            }, function(response) {
+                $scope.data = response.data || "Request failed";
+                $scope.status = response.status;
+            });
+        };
+
+        $scope.albumResultfield     = ['type', 'id', 'title', 'link', 'cover', 'artist_id', 'artist_name', 'artist_picture'];
+        $scope.trackResultfield     = ['type', 'id', 'title', 'link', 'album_id', 'album_title', 'album_cover', 'artist_id', 'artist_name', 'artist_picture'];
+        $scope.artistResultfield    = ['type', 'id', 'name', 'link', 'picture'];
+        $scope.playlistResultfield    = ['type', 'id', 'title', 'link', 'picture', 'user_id', 'user_name'];
+        $scope.chartTracksResultfield = ['position', 'type', 'id', 'title', 'link', 'album_id', 'album_title', 'album_cover', 'artist_id', 'artist_name', 'artist_picture'];
+        $scope.chartAlbumsResultfield     = ['position', 'type', 'id', 'title', 'link', 'cover', 'artist_id', 'artist_name', 'artist_picture'];
+        $scope.chartArtistsResultfield    = ['position', 'type', 'id', 'name', 'link', 'picture'];
+        $scope.chartPlaylistsResultfield    = ['position', 'type', 'id', 'title', 'link', 'picture', 'user_id', 'user_name'];
+    }]);
+    //deezer result display directive
+    app.directive('deezerResultTable', function() {
+        return {
+            restrict: 'E',
+            scope: {
+                directiveData: "=result",
+                directiveFields: "=fields"
+            },
+            templateUrl: 'deezerResultTable'
+        };
+    });
+    app.directive('bootstrapSwitch', [
+        function() {
+            return {
+                restrict: 'A',
+                require: '?ngModel',
+                link: function(scope, element, attrs, ngModel) {
+                    element.bootstrapSwitch();
+
+                    element.on('switchChange.bootstrapSwitch', function(event, state) {
+                        if (ngModel) {
+                            scope.$apply(function() {
+                                ngModel.$setViewValue(state);
+                            });
+                        }
+                    });
+
+                    scope.$watch(attrs.ngModel, function(newValue, oldValue) {
+                        if (newValue) {
+                            element.bootstrapSwitch('state', true, true);
+                        } else {
+                            element.bootstrapSwitch('state', false, true);
+                        }
+                    });
+                }
+            };
+        }
+    ]);
 })(window.angular);

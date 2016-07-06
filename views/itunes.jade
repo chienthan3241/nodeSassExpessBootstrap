@@ -12,256 +12,259 @@ block content
         .container
             .col-md-12
                 h1 ITUNES API
+    .clearfix
     .container(ng-controller="iTunesApi")
         .row
             .col-lg-12
-                .well
-                    form.form-horizontal(ng-submit="submit()", name="appleapi")
-                        legend Itunes api Search/Lookup Parameters
-                        .form-group
-                            label.control-label.col-lg-2 Api-Type:
-                            .col-lg-2
-                                select.form-control(id="apitype", name="apitype", ng-model="type", ng-change="change()")
-                                    option search
-                                    option lookup
-                        //Search Term==================================================
-                        //term
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="term") Term:
-                            .col-lg-4(ng-class="(appleapi.term.$invalid) ? 'has-error' : 'has-success'")
-                                input.form-control(type="text", id="term", name="term", ng-model="term",
-                                placeholder="Search input", ng-required="type=='search'", ng-change="change()")
-                            +modal("#searchTerm", "searchTerm", "searchTermLabel", 'Term')
-                                h5 Description
-                                p.
-                                    The URL-encoded text string you want to search for. For example: jack+johnson.
-                                h5 Required
-                                p Y
-                                h5 Values
-                                p.
-                                    Any URL-encoded text string. Note: URL encoding replaces spaces with the plus (+)
-                                    character and all characters except the following are encoded: letters, numbers, periods (.),
-                                    dashes (-), underscores (_), and asterisks (*).
-                                +modalFooter
-                        //country
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="country") Country(ISO):
-                            .col-lg-2
-                                input.form-control(type="text", id="country", name="country", ng-model="country",
-                                placeholder="Country ISO", ng-change="change()")
-                            +modal("#searchCountry", "searchCountry", "searchCountryLabel", 'Country')
-                                h5 Description
-                                p.
-                                    The two-letter country code for the store you want to search.
-                                    The search uses the default store front for the specified country.
-                                    For example: US. The default is US.
-                                h5 Required
-                                p Y
-                                h5 Values
-                                p.
-                                    See #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO_3166-1_alpha-2]
-                                    for a list of ISO Country Codes.
-                                +modalFooter
-                        //media
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="media") Media type:
-                            .col-lg-2
-                                select.form-control(id="media", name='media', ng-model="media", ng-change="change();changeMedia();")
-                                    option ----
-                                    option(ng-repeat="mediaType in mediaTypes") {{mediaType}}
-                            +modal("#searchMedia", "searchMedia", "searchMediaLabel", 'Media')
-                                h5 Description
-                                p The media type you want to search for. For example: movie. The default is all.
-                                h5 Required
-                                p N
-                                h5 Values
-                                p.
-                                    movie, podcast, music, musicVideo, audiobook, shortFilm, tvShow, software, ebook, all
-                                +modalFooter
-                        //entity
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="entity") Entity:
-                            .col-lg-2
-                                select.form-control(id="entity", name='entity', ng-model="entity", ng-change="change()")
-                                    option ----
-                                    option(ng-repeat="ent in entities") {{ent}}
-                            +modal("#searchEntity", "searchEntity", "searchEntityLabel", 'Entity')
-                                h5 Description
-                                p.
-                                    The type of results you want returned, relative to the specified media type.
-                                    For example: movieArtist for a movie media type search.
-                                    The default is the track entity associated with the specified media type.
-                                h5 Required
-                                p N
-                                h5 Values
-                                p.
-                                    The following entities are available for each media type:
-                                table.table.table-bordered.table-hover
-                                    tr(ng-repeat="(key, value) in mediaEntities")
-                                        td.active
-                                            b {{key}}
-                                        td {{value.toString()}}
-                                +modalFooter
-                        //attribute
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="attribute") Attribute:
-                            .col-lg-2
-                                select.form-control(id="attribute", name='attribute', ng-model="attribute", ng-change="change()")
-                                    option ----
-                                    option(ng-repeat="attr in attributes") {{attr}}
-                            +modal("#searchAttribute", "searchAttribute", "searchAttributeLabel", 'Attribute')
-                                h5 Description
-                                p.
-                                    The attribute you want to search for in the stores, relative to the specified media type.
-                                    For example, if you want to search for an artist by name specify
-                                    entity=allArtist&attribute=allArtistTerm. In this example,
-                                    if you search for term=maroon, iTunes returns “Maroon 5” in the search results,
-                                    instead of all artists who have ever recorded a song with the word “maroon” in the title.
-                                    #[br]#[br] The default is all attributes associated with the specified media type.
-                                h5 Required
-                                p N
-                                h5 Values
-                                p.
-                                    The following attributes are available for each media type:
-                                table.table.table-bordered.table-hover
-                                    tr(ng-repeat="(key, value) in mediaAttributes")
-                                        td.active
-                                            b {{key}}
-                                        td.col-md-4(style="word-wrap: break-word;min-width: 460px;max-width: 460px;") {{value.toString()}}
-                                +modalFooter
-                        //limit
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="limit") Limit:
-                            .col-lg-2(ng-class="(appleapi.limit.$invalid) ? 'has-error' : 'has-success'")
-                                input.form-control(type="number", id="limit", name="limit", ng-model="limit",
-                                placeholder="limit", ng-change="change()", min="1", max="200")
-                            +modal("#searchLimit", "searchLimit", "searchLimitLabel", 'Limit')
-                                h5 Description
-                                p.
-                                    The number of search results you want the iTunes Store to return.
-                                    For example: 25.The default is 50.
-                                h5 Required
-                                p N
-                                h5 Values
-                                p 1 to 200
-                                +modalFooter
-                        //lang
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="lang") Lang:
-                            .col-lg-2
-                                select.form-control(id="lang", name="lang", ng-model="lang", ng-change="change()")
-                                    option(ng-repeat="val in langArray") {{val}}
-                            +modal("#searchLang", "searchLang", "searchLangLabel", 'Lang')
-                                h5 Description
-                                p.
-                                    The language, English or Japanese, you want to use when returning
-                                    search results. Specify the language using the five-letter codename.
-                                    For example: en_us.The default is en_us (English).
-                                h5 Required
-                                p N
-                                h5 Values
-                                p en_us, ja_jp
-                                +modalFooter
-                        //version
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="version") Version:
-                            .col-lg-2
-                                select.form-control(id="version", name="version", ng-model="version", ng-change="change()")
-                                    option(ng-repeat="val in [1,2]") {{val}}
-                            +modal("#searchVersion", "searchVersion", "searchVersionLabel", 'Version')
-                                h5 Description
-                                p.
-                                    The search result key version you want to receive back from your search.The default is 2.
-                                h5 Required
-                                p N
-                                h5 Values
-                                p 1, 2
-                                +modalFooter
-                        //explicit
-                        .form-group(ng-show="type=='search'")
-                            label.control-label.col-lg-2(for="explicit") Explicit:
-                            .col-lg-2
-                                select.form-control(id="explicit", name="explicit", ng-model="explicit", ng-change="change()")
-                                    option(ng-repeat="val in ['Yes','No']") {{val}}
-                            +modal("#searchExplicit", "searchExplicit", "searchExplicitLabel", 'Explicit')
-                                h5 Description
-                                p.
-                                    A flag indicating whether or not you want to include explicit content
-                                    in your search results.The default is Yes.
-                                h5 Required
-                                p N
-                                h5 Values
-                                p Yes, No
-                                +modalFooter
+                .panel.panel-warning
+                    .panel-heading
+                        h6(style="color: #fff") Itunes api Search/Lookup Parameters
+                    .panel-body
+                        form.form-horizontal(ng-submit="submit()", name="appleapi")
+                            .form-group
+                                label.control-label.col-lg-2 Api-Type:
+                                .col-lg-2
+                                    select.form-control(id="apitype", name="apitype", ng-model="type", ng-change="change()")
+                                        option search
+                                        option lookup
+                            //Search Term==================================================
+                            //term
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="term") Term:
+                                .col-lg-4(ng-class="(appleapi.term.$invalid) ? 'has-error' : 'has-success'")
+                                    input.form-control(type="text", id="term", name="term", ng-model="term",
+                                    placeholder="Search input", ng-required="type=='search'", ng-change="change()")
+                                +modal("#searchTerm", "searchTerm", "searchTermLabel", 'Term')
+                                    h5 Description
+                                    p.
+                                        The URL-encoded text string you want to search for. For example: jack+johnson.
+                                    h5 Required
+                                    p Y
+                                    h5 Values
+                                    p.
+                                        Any URL-encoded text string. Note: URL encoding replaces spaces with the plus (+)
+                                        character and all characters except the following are encoded: letters, numbers, periods (.),
+                                        dashes (-), underscores (_), and asterisks (*).
+                                    +modalFooter
+                            //country
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="country") Country(ISO):
+                                .col-lg-2
+                                    input.form-control(type="text", id="country", name="country", ng-model="country",
+                                    placeholder="Country ISO", ng-change="change()")
+                                +modal("#searchCountry", "searchCountry", "searchCountryLabel", 'Country')
+                                    h5 Description
+                                    p.
+                                        The two-letter country code for the store you want to search.
+                                        The search uses the default store front for the specified country.
+                                        For example: US. The default is US.
+                                    h5 Required
+                                    p Y
+                                    h5 Values
+                                    p.
+                                        See #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO_3166-1_alpha-2]
+                                        for a list of ISO Country Codes.
+                                    +modalFooter
+                            //media
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="media") Media type:
+                                .col-lg-2
+                                    select.form-control(id="media", name='media', ng-model="media", ng-change="change();changeMedia();")
+                                        option ----
+                                        option(ng-repeat="mediaType in mediaTypes") {{mediaType}}
+                                +modal("#searchMedia", "searchMedia", "searchMediaLabel", 'Media')
+                                    h5 Description
+                                    p The media type you want to search for. For example: movie. The default is all.
+                                    h5 Required
+                                    p N
+                                    h5 Values
+                                    p.
+                                        movie, podcast, music, musicVideo, audiobook, shortFilm, tvShow, software, ebook, all
+                                    +modalFooter
+                            //entity
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="entity") Entity:
+                                .col-lg-2
+                                    select.form-control(id="entity", name='entity', ng-model="entity", ng-change="change()")
+                                        option ----
+                                        option(ng-repeat="ent in entities") {{ent}}
+                                +modal("#searchEntity", "searchEntity", "searchEntityLabel", 'Entity')
+                                    h5 Description
+                                    p.
+                                        The type of results you want returned, relative to the specified media type.
+                                        For example: movieArtist for a movie media type search.
+                                        The default is the track entity associated with the specified media type.
+                                    h5 Required
+                                    p N
+                                    h5 Values
+                                    p.
+                                        The following entities are available for each media type:
+                                    table.table.table-bordered.table-hover
+                                        tr(ng-repeat="(key, value) in mediaEntities")
+                                            td.active
+                                                b {{key}}
+                                            td {{value.toString()}}
+                                    +modalFooter
+                            //attribute
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="attribute") Attribute:
+                                .col-lg-2
+                                    select.form-control(id="attribute", name='attribute', ng-model="attribute", ng-change="change()")
+                                        option ----
+                                        option(ng-repeat="attr in attributes") {{attr}}
+                                +modal("#searchAttribute", "searchAttribute", "searchAttributeLabel", 'Attribute')
+                                    h5 Description
+                                    p.
+                                        The attribute you want to search for in the stores, relative to the specified media type.
+                                        For example, if you want to search for an artist by name specify
+                                        entity=allArtist&attribute=allArtistTerm. In this example,
+                                        if you search for term=maroon, iTunes returns “Maroon 5” in the search results,
+                                        instead of all artists who have ever recorded a song with the word “maroon” in the title.
+                                        #[br]#[br] The default is all attributes associated with the specified media type.
+                                    h5 Required
+                                    p N
+                                    h5 Values
+                                    p.
+                                        The following attributes are available for each media type:
+                                    table.table.table-bordered.table-hover
+                                        tr(ng-repeat="(key, value) in mediaAttributes")
+                                            td.active
+                                                b {{key}}
+                                            td.col-md-4(style="word-wrap: break-word;min-width: 460px;max-width: 460px;") {{value.toString()}}
+                                    +modalFooter
+                            //limit
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="limit") Limit:
+                                .col-lg-2(ng-class="(appleapi.limit.$invalid) ? 'has-error' : 'has-success'")
+                                    input.form-control(type="number", id="limit", name="limit", ng-model="limit",
+                                    placeholder="limit", ng-change="change()", min="1", max="200")
+                                +modal("#searchLimit", "searchLimit", "searchLimitLabel", 'Limit')
+                                    h5 Description
+                                    p.
+                                        The number of search results you want the iTunes Store to return.
+                                        For example: 25.The default is 50.
+                                    h5 Required
+                                    p N
+                                    h5 Values
+                                    p 1 to 200
+                                    +modalFooter
+                            //lang
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="lang") Lang:
+                                .col-lg-2
+                                    select.form-control(id="lang", name="lang", ng-model="lang", ng-change="change()")
+                                        option(ng-repeat="val in langArray") {{val}}
+                                +modal("#searchLang", "searchLang", "searchLangLabel", 'Lang')
+                                    h5 Description
+                                    p.
+                                        The language, English or Japanese, you want to use when returning
+                                        search results. Specify the language using the five-letter codename.
+                                        For example: en_us.The default is en_us (English).
+                                    h5 Required
+                                    p N
+                                    h5 Values
+                                    p en_us, ja_jp
+                                    +modalFooter
+                            //version
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="version") Version:
+                                .col-lg-2
+                                    select.form-control(id="version", name="version", ng-model="version", ng-change="change()")
+                                        option(ng-repeat="val in [1,2]") {{val}}
+                                +modal("#searchVersion", "searchVersion", "searchVersionLabel", 'Version')
+                                    h5 Description
+                                    p.
+                                        The search result key version you want to receive back from your search.The default is 2.
+                                    h5 Required
+                                    p N
+                                    h5 Values
+                                    p 1, 2
+                                    +modalFooter
+                            //explicit
+                            .form-group(ng-show="type=='search'")
+                                label.control-label.col-lg-2(for="explicit") Explicit:
+                                .col-lg-2
+                                    select.form-control(id="explicit", name="explicit", ng-model="explicit", ng-change="change()")
+                                        option(ng-repeat="val in ['Yes','No']") {{val}}
+                                +modal("#searchExplicit", "searchExplicit", "searchExplicitLabel", 'Explicit')
+                                    h5 Description
+                                    p.
+                                        A flag indicating whether or not you want to include explicit content
+                                        in your search results.The default is Yes.
+                                    h5 Required
+                                    p N
+                                    h5 Values
+                                    p Yes, No
+                                    +modalFooter
 
-                        //Lookupoption ==================================================
-                        //country
-                        .form-group(ng-show="type=='lookup'")
-                            label.control-label.col-lg-2(for="country") Country(ISO):
-                            .col-lg-2
-                                input.form-control(type="text", id="lookupCountry", name="lookupCountry", ng-model="lookupCountry",
-                                placeholder="Country ISO", ng-change="change()")
-                            +modal("#searchlookupCountry", "searchlookupCountry", "searchlookupCountryLabel", 'Country')
-                                h5 Description
-                                p.
-                                    The two-letter country code for the store you want to search.
-                                    The search uses the default store front for the specified country.
-                                    For example: US. The default is US.
-                                h5 Required
-                                p Y
-                                h5 Values
-                                p.
-                                    See #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO_3166-1_alpha-2]
-                                    for a list of ISO Country Codes.
-                                +modalFooter
-                        //Ids
-                        .form-group(ng-show="type=='lookup'")
-                            label.control-label.col-lg-2(for="id") IDs:
-                            .col-lg-4
-                                input.form-control(type="text", id="id", name="id", ng-model="id",
-                                placeholder="IDs", ng-change="change()",
-                                ng-disabled="upc || amgArtistId || amgAlbumId || amgVideoId || isbn")
-                        //UPCs/EANs
-                        .form-group(ng-show="type=='lookup'")
-                            label.control-label.col-lg-2(for="upc") UPCs/EANs:
-                            .col-lg-4
-                                input.form-control(type="text", id="upc", name="upc", ng-model="upc",
-                                placeholder="UPCs/EANs", ng-change="change()",
-                                ng-disabled="id || amgArtistId || amgAlbumId || amgVideoId || isbn")
-                        //amgArtistIDs
-                        .form-group(ng-show="type=='lookup'")
-                            label.control-label.col-lg-2(for="amgArtistId") AMG Artist IDs:
-                            .col-lg-4
-                                input.form-control(type="text", id="amgArtistId", name="amgArtistId", ng-model="amgArtistId",
-                                placeholder="AMG Artist IDs", ng-change="change()",
-                                ng-disabled="upc || id || amgAlbumId || amgVideoId || isbn")
-                        //amgAlbumIDs
-                        .form-group(ng-show="type=='lookup'")
-                            label.control-label.col-lg-2(for="amgAlbumId") AMG Album IDs:
-                            .col-lg-4
-                                input.form-control(type="text", id="amgAlbumId", name="amgAlbumId", ng-model="amgAlbumId",
-                                placeholder="AMG Album IDs", ng-change="change()",
-                                ng-disabled="upc || amgArtistId || id || amgVideoId || isbn")
-                        //amgVideoIDs
-                        .form-group(ng-show="type=='lookup'")
-                            label.control-label.col-lg-2(for="amgVideoId") AMG Video IDs:
-                            .col-lg-4
-                                input.form-control(type="text", id="amgVideoId", name="amgVideoId", ng-model="amgVideoId",
-                                placeholder="AMG Video IDs", ng-change="change()",
-                                ng-disabled="upc || amgArtistId || amgAlbumId || id || isbn")
-                        //isbn
-                        .form-group(ng-show="type=='lookup'")
-                            label.control-label.col-lg-2(for="isbn") ISBN:
-                            .col-lg-4
-                                input.form-control(type="text", id="isbn", name="isbn", ng-model="isbn",
-                                placeholder="ISBN", ng-change="change()",
-                                ng-disabled="upc || amgArtistId || amgAlbumId || amgVideoId || id")
-                        br
-                        pre {{request}}
-                        br
-                        .form-group
-                            .col-lg-2
-                                button.btn.btn-primary(type="submit", id="submit", ng-disabled="submitDisabled") Submit
+                            //Lookupoption ==================================================
+                            //country
+                            .form-group(ng-show="type=='lookup'")
+                                label.control-label.col-lg-2(for="country") Country(ISO):
+                                .col-lg-2
+                                    input.form-control(type="text", id="lookupCountry", name="lookupCountry", ng-model="lookupCountry",
+                                    placeholder="Country ISO", ng-change="change()")
+                                +modal("#searchlookupCountry", "searchlookupCountry", "searchlookupCountryLabel", 'Country')
+                                    h5 Description
+                                    p.
+                                        The two-letter country code for the store you want to search.
+                                        The search uses the default store front for the specified country.
+                                        For example: US. The default is US.
+                                    h5 Required
+                                    p Y
+                                    h5 Values
+                                    p.
+                                        See #[a(target="_blank", href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2") ISO_3166-1_alpha-2]
+                                        for a list of ISO Country Codes.
+                                    +modalFooter
+                            //Ids
+                            .form-group(ng-show="type=='lookup'")
+                                label.control-label.col-lg-2(for="id") IDs:
+                                .col-lg-4
+                                    input.form-control(type="text", id="id", name="id", ng-model="id",
+                                    placeholder="IDs", ng-change="change()",
+                                    ng-disabled="upc || amgArtistId || amgAlbumId || amgVideoId || isbn")
+                            //UPCs/EANs
+                            .form-group(ng-show="type=='lookup'")
+                                label.control-label.col-lg-2(for="upc") UPCs/EANs:
+                                .col-lg-4
+                                    input.form-control(type="text", id="upc", name="upc", ng-model="upc",
+                                    placeholder="UPCs/EANs", ng-change="change()",
+                                    ng-disabled="id || amgArtistId || amgAlbumId || amgVideoId || isbn")
+                            //amgArtistIDs
+                            .form-group(ng-show="type=='lookup'")
+                                label.control-label.col-lg-2(for="amgArtistId") AMG Artist IDs:
+                                .col-lg-4
+                                    input.form-control(type="text", id="amgArtistId", name="amgArtistId", ng-model="amgArtistId",
+                                    placeholder="AMG Artist IDs", ng-change="change()",
+                                    ng-disabled="upc || id || amgAlbumId || amgVideoId || isbn")
+                            //amgAlbumIDs
+                            .form-group(ng-show="type=='lookup'")
+                                label.control-label.col-lg-2(for="amgAlbumId") AMG Album IDs:
+                                .col-lg-4
+                                    input.form-control(type="text", id="amgAlbumId", name="amgAlbumId", ng-model="amgAlbumId",
+                                    placeholder="AMG Album IDs", ng-change="change()",
+                                    ng-disabled="upc || amgArtistId || id || amgVideoId || isbn")
+                            //amgVideoIDs
+                            .form-group(ng-show="type=='lookup'")
+                                label.control-label.col-lg-2(for="amgVideoId") AMG Video IDs:
+                                .col-lg-4
+                                    input.form-control(type="text", id="amgVideoId", name="amgVideoId", ng-model="amgVideoId",
+                                    placeholder="AMG Video IDs", ng-change="change()",
+                                    ng-disabled="upc || amgArtistId || amgAlbumId || id || isbn")
+                            //isbn
+                            .form-group(ng-show="type=='lookup'")
+                                label.control-label.col-lg-2(for="isbn") ISBN:
+                                .col-lg-4
+                                    input.form-control(type="text", id="isbn", name="isbn", ng-model="isbn",
+                                    placeholder="ISBN", ng-change="change()",
+                                    ng-disabled="upc || amgArtistId || amgAlbumId || amgVideoId || id")
+                            br
+                            pre {{request}}
+                            br
+                            .form-group
+                                .col-lg-2
+                                    button.btn.btn-primary(type="submit", id="submit", ng-disabled="submitDisabled") Submit
         .row(ng-show="status != null")
             .col-lg-12
                 .well

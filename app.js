@@ -34,8 +34,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', routes);
 app.use('/users', users);
 
-//user proxy request to avoid cors http request
-app.use('/corsproxy', function(req, res) {
+//user proxy request to avoid cors http request spotify
+app.use('/corsproxyspotify', function(req, res) {
         var url = 'https://api.spotify.com/v1/users/';
         var params = urli.parse(req.url, true).query;
         var accessToken = 'Bearer ' + params.token;
@@ -51,6 +51,31 @@ app.use('/corsproxy', function(req, res) {
         url = _.trimEnd(url, '&');
         url = _.trimEnd(url, '?');
         req.pipe(request({url: url, headers: {Authorization: accessToken}})).pipe(res);
+});
+// cors proxy for request deezer
+app.use('/corsproxydeezer', function (req, res) {
+    var url = 'https://api.deezer.com/';
+    var params = urli.parse(req.url, true).query;
+    url += params.qtype;
+
+    if (params.qtype == 'search') {
+        if (params.type != 'all') {
+            url += '/' + params.type;
+        }
+        url += '?q=' + params.q + '&';
+        url += _.has(params, 'fuzzy') ? 'strict=on&' : '';
+        url += _.has(params, 'order') ? 'order=' + params.order + '&' : ''
+    } else {
+        url += '/' + params.q + '?';
+    }
+    if (_.has(params, 'index')) {
+        url += 'index=' + params.index + '&';
+    }
+    if (_.has(params, 'limit')) {
+        url += 'limit=' + params.limit + '&';
+    }
+    url += 'output=json';
+    req.pipe(request({url: url})).pipe(res);
 });
 
 // catch 404 and forward to error handler

@@ -1,5 +1,7 @@
 //
    Created by manh-cuong on 21.06.16.
+include mixin/mixins
+
 extends layout
 
 block header
@@ -8,4 +10,126 @@ block content
     .container-fluid.page_title2
         .container
             .col-md-12
-                h1 Comming soon
+                h1 DEEZER API
+    .clearfix
+    .container(ng-controller="deezerApi")
+        .row
+            .col-lg-12
+                .panel.panel-warning
+                    .panel-heading
+                        h6(style="color: #fff") Deezer API endpoint parameters
+                    .panel-body
+                        form.form-horizontal(ng-submit="submit()", name="deezerApi")
+                            .form-group
+                                label.control-label.col-lg-2 Api-Type:
+                                .col-lg-6
+                                    .btn-group(role="group")
+                                        .btn.btn-default(ng-class="(qtype == 'search') ? 'btn-info' : ''", ng-click="qtype = 'search'; change();") Search
+                                        .btn.btn-default(ng-class="(qtype == 'chart') ? 'btn-info' : ''", ng-click="qtype = 'chart'; change();") Chart
+                                        .btn.btn-default(ng-class="(qtype == 'track') ? 'btn-info' : ''", ng-click="qtype = 'track'; change();") Track
+                                        .btn.btn-default(ng-class="(qtype == 'artist') ? 'btn-info' : ''", ng-click="qtype = 'artist'; change();") Artist
+                                        .btn.btn-default(ng-class="(qtype == 'album') ? 'btn-info' : ''", ng-click="qtype = 'album'; change();") Album
+                                        .btn.btn-default(ng-class="(qtype == 'playlist') ? 'btn-info' : ''", ng-click="qtype = 'playlist'; change();") Playlist
+                            //Charts ==================================================
+                            .form-group(ng-show="qtype=='chart'")
+                                label.control-label.col-lg-2 Chart Type:
+                                .col-lg-4
+                                    .btn-group.btn-group-sm(role="group")
+                                        .btn.btn-default(ng-class="(ctype == 'tracks') ? 'btn-primary' : ''", ng-click="ctype = 'tracks'") Tracks
+                                        .btn.btn-default(ng-class="(ctype == 'artists') ? 'btn-primary' : ''", ng-click="ctype = 'artists'") Artists
+                                        .btn.btn-default(ng-class="(ctype == 'albums') ? 'btn-primary' : ''", ng-click="ctype = 'albums'") Albums
+                                        .btn.btn-default(ng-class="(ctype == 'playlists') ? 'btn-primary' : ''", ng-click="ctype = 'playlists'") Playlists
+                            //Search ==================================================
+                            .form-group(ng-show="qtype!='chart'")
+                                label.control-label.col-lg-2(for='q') Query:
+                                .col-lg-4(ng-class="(deezerApi.q.$invalid) ? 'has-error' : 'has-success'")
+                                    input.form-control(type="text", id="q", name="q", ng-model="q",
+                                    placeholder="query's keywords", ng-required="qtype != 'chart'", ng-change="change()")
+                            //type
+                            .form-group(ng-show="qtype=='search'")
+                                label.control-label.col-lg-2 Type:
+                                .col-lg-4
+                                    .btn-group.btn-group-sm(role="group")
+                                        .btn.btn-default(ng-class="(type == 'track') ? 'btn-primary' : ''", ng-click="type = 'track'; change();") Track
+                                        .btn.btn-default(ng-class="(type == 'artist') ? 'btn-primary' : ''", ng-click="type = 'artist'; change();") Artist
+                                        .btn.btn-default(ng-class="(type == 'album') ? 'btn-primary' : ''", ng-click="type = 'album'; change();") Album
+                                        .btn.btn-default(ng-class="(type == 'playlist') ? 'btn-primary' : ''", ng-click="type = 'playlist'; change();") Playlist
+                            //fuzzy search
+                            .form-group(ng-show="qtype=='search'")
+                                label.control-label.col-lg-2 Strict:
+                                .col-lg-2
+                                    input(type="checkbox", name="fuzzy", id='fuzzy', data-size="small",
+                                    data-on-color="primary", data-label-text="Fuzzy Search", ng-model="fuzzy", bootstrap-switch, ng-change="change()")
+                            //Order
+                            .form-group(ng-show="qtype=='search'")
+                                label.control-label.col-lg-2(for="order") Order:
+                                .col-lg-2
+                                    select.form-control.input-sm(type="text", id="order", name="order", ng-model="order", ng-change="change()")
+                                        option ----
+                                        option(ng-repeat="val in orderArray") {{val}}
+                            //get Tracks
+                            .form-group(ng-show="qtype=='album' || qtype=='playlist'")
+                                label.control-label.col-lg-2 Get Tracks:
+                                .col-lg-2
+                                    input(type="checkbox", name="getTracks", id="getTracks", data-size="mini",
+                                    data-on-color="primary", data-on-text='Yes', data-off-text='No', ng-model="getTracks", bootstrap-switch, ng-change="change()")
+                            //index
+                            .form-group
+                                label.control-label.col-lg-2(for="index") Index:
+                                .col-lg-1(ng-class="(deezerApi.index.$invalid) ? 'has-error' : 'has-success'")
+                                    input.form-control(type="number", id="index", name="index", ng-model="index",
+                                    placeholder="index", ng-change="change()", min="0")
+                            //limit
+                            .form-group
+                                label.control-label.col-lg-2(for="limit") Limit:
+                                .col-lg-1(ng-class="(deezerApi.limit.$invalid) ? 'has-error' : 'has-success'")
+                                    input.form-control(type="number", id="limit", name="limit", ng-model="limit",
+                                    placeholder="limit", ng-change="change()", min="1")
+                            //submit area ==================================================
+                            br
+                            pre {{request}}
+                            br
+                            .form-group
+                                .col-lg-2
+                                    button.btn.btn-primary(type="submit", id="submit", ng-disabled="submitDisabled") Submit
+        .row(ng-show="status != null")
+            .col-lg-12
+                .well
+                    pre(ng-class="(status == 200) ? 'bg-success' : 'bg-danger'").
+                        http status code: {{status}}
+        //==============================================================================================================
+        include AngularTemplate/deezerResultTable
+
+        .row(ng-show="(status == '200') && ((qtype=='search' && type== 'track') || (qtype=='track') || ((qtype=='album' || qtype=='playlist') && getTracks))")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data", fields="trackResultfield")
+        .row(ng-show="(status == '200') && ((qtype=='search' && type== 'artist') || (qtype=='artist'))")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data", fields="artistResultfield")
+        .row(ng-show="(status == '200') && ((qtype=='search' && type== 'album') || (qtype=='album' && getTracks==false))")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data", fields="albumResultfield")
+        .row(ng-show="(status == '200') && ((qtype=='search' && type== 'playlist') || (qtype=='playlist' && getTracks==false))")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data", fields="playlistResultfield")
+        //charts results
+        .row(ng-show="(status == '200') && qtype=='chart' && ctype=='tracks'")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data.tracks.data", fields="chartTracksResultfield")
+        .row(ng-show="(status == '200') && qtype=='chart' && ctype=='albums'")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data.albums.data", fields="chartAlbumsResultfield")
+        .row(ng-show="(status == '200') && qtype=='chart' && ctype=='artists'")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data.artists.data", fields="chartArtistsResultfield")
+        .row(ng-show="(status == '200') && qtype=='chart' && ctype=='playlists'")
+            .col-lg-12
+                .well
+                    deezer-result-table(result="data.playlists.data", fields="chartPlaylistsResultfield")

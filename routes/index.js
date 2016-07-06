@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
       res.send(err);
       //res.render('index', { title: 'Express', users: [] });
     } else {
-      res.render('index', { title: 'Express', results: users });
+      res.render('index', { title: 'Express', results: users , navHome: 'active'});
       //res.send(JSON.stringify(users));
     }
   });
@@ -18,17 +18,17 @@ router.get('/', function(req, res, next) {
 
 // itunes api
 router.get('/itunes', function(req, res, next) {
-  res.render('itunes', { title: 'Itunes Api'});
+  res.render('itunes', { title: 'Itunes Api', navDrop: 'active'});
 });
 
 //spotify api
 router.get('/spotify', function(req, res, next) {
-  res.render('spotify', { title: 'Spotify Api'});
+  res.render('spotify', { title: 'Spotify Api',  navDrop: 'active'});
 });
 
 //deezer api
 router.get('/deezer', function(req, res, next) {
-  res.render('deezer', { title: 'Deezer Api'});
+  res.render('deezer', { title: 'Deezer Api',  navDrop: 'active'});
 });
 
 module.exports = router;
