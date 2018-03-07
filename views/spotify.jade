@@ -30,6 +30,14 @@ block content
                                         button.btn.btn-default(ng-class="(qtype == 'album') ? 'btn-warning' : ''", ng-click="qtype = 'album'; change();") Album
                                         button.btn.btn-default(ng-class="(qtype == 'playlist') ? 'btn-warning' : ''", ng-click="qtype = 'playlist'; change();") Playlist
                             //Search ==================================================
+                            //access Token
+                            .form-group
+                                label.control-label.col-lg-2(for="accessToken") Access Token:
+                                .col-lg-8(ng-class="(spotifyApi.accessToken.$invalid) ? 'has-error' : 'has-success'")
+                                    input.form-control(type="text", id="accessToken", name="accessToken", ng-model="accessToken",
+                                    ng-required="true", ng-change="change()")
+                                .col-lg-2
+                                    a.btn.btn-sm.btn-info(href="https://accounts.spotify.com/authorize?client_id=aa534da9eceb4a34b628cd77078760ee&response_type=token&redirect_uri=https://nodeexpressmongoangular.herokuapp.com/spotify/") get Token
                             //q
                             .form-group(ng-show="qtype=='search'")
                                 label.control-label.col-lg-2(for='q') Query:
@@ -366,14 +374,6 @@ block content
                                         #[a(target='_blank', href='https://developer.spotify.com/web-api/track-relinking-guide/') Track Relinking].
                                     +modalFooter
                             //Playlist
-                            //access Token
-                            .form-group(ng-show="qtype == 'playlist'")
-                                label.control-label.col-lg-2(for="playlistsAccessToken") Access Token:
-                                .col-lg-8(ng-class="(spotifyApi.playlistsAccessToken.$invalid) ? 'has-error' : 'has-success'")
-                                    input.form-control(type="text", id="playlistsAccessToken", name="playlistsAccessToken", ng-model="playlistsAccessToken",
-                                    ng-required="qtype == 'playlist'", ng-change="change()")
-                                .col-lg-2
-                                    a.btn.btn-sm.btn-info(href="https://accounts.spotify.com/authorize?client_id=aa534da9eceb4a34b628cd77078760ee&response_type=token&redirect_uri=https://nodeexpressmongoangular.herokuapp.com/spotify/") get Token
                             //user ID
                             .form-group(ng-show="qtype == 'playlist'")
                                 label.control-label.col-lg-2(for="playlistUserId") User ID:

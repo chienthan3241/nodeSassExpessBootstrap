@@ -176,8 +176,7 @@
         });
 
         if (_.has(params, 'access_token') && _.has(params, 'token_type')) {
-            $scope.qtype = 'playlist';
-            $scope.playlistsAccessToken = _.get(params, 'access_token', '');
+            $scope.accessToken = _.get(params, 'access_token', '');
             $location.path('');
         }
         $scope.playlistTracks = false;
@@ -193,7 +192,7 @@
                     $scope.request += ($scope.market) ? '&market=' + $scope.market : '';
                     $scope.request += ($scope.limit && $scope.limit != 20) ? '&limit=' + $scope.limit : '';
                     $scope.request += ($scope.offset && $scope.offset != 0) ? '&offset=' + $scope.offset : '';
-                    $scope.submitDisabled = !($scope.q && !isNaN($scope.limit) && !isNaN($scope.offset)) ;
+                    $scope.submitDisabled = !($scope.accessToken && $scope.q && !isNaN($scope.limit) && !isNaN($scope.offset)) ;
                     $scope.status = null;
                     $scope.data = null;
                     break;
@@ -223,7 +222,7 @@
                     //artist related artist
                     $scope.request += (!$scope.multiArtist && $scope.artistRelatedArtists) ? '/related-artists' : '';
 
-                    $scope.submitDisabled = !(
+                    $scope.submitDisabled = !($scope.accessToken && ($scope.accessToken && (
                         ($scope.multiArtist && $scope.artistIds) ||
                         (!$scope.multiArtist && $scope.artistId &&
                             (
@@ -233,7 +232,7 @@
                                 (!$scope.artistAlbum && !$scope.artistTopTracks && !$scope.artistRelatedArtists)
                             )
                         )
-                    ) ;
+                    )));
                     $scope.status = null;
                     $scope.data = null;
                     break;
@@ -249,7 +248,7 @@
                     $scope.request += (!$scope.multiAlbum && $scope.albumTracks && $scope.albumTracksMarket) ? 'market=' + $scope.albumTracksMarket : '';
                     $scope.request = _.trimEnd($scope.request, '&');
                     $scope.request = _.trimEnd($scope.request, '?');
-                    $scope.submitDisabled = !(
+                    $scope.submitDisabled = !($scope.accessToken && (
                         ($scope.multiAlbum && $scope.albumsIds) ||
                         (!$scope.multiAlbum && $scope.albumsId &&
                             (
@@ -257,7 +256,7 @@
                                 ($scope.albumTracks && !isNaN($scope.albumTrackslimit) && !isNaN($scope.albumTracksOffset))
                             )
                         )
-                    );
+                    ));
                     $scope.status = null;
                     $scope.data = null;
                     break;
@@ -265,7 +264,7 @@
                     //$scope.request = '/corsproxy/';
                     //redirect to proxy to prevent cors pre-flight request
                     $scope.request = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/corsproxyspotify?';
-                    $scope.request += 'token=' + $scope.playlistsAccessToken + '&';
+                    $scope.request += 'token=' + $scope.accessToken + '&';
                         //'https://api.spotify.com/v1';cors_server_proxy
                     $scope.request += ($scope.playlistUserId) ? 'users=' + $scope.playlistUserId + '&' : '';
                     $scope.request += ($scope.playlistId) ? 'playlists=' + $scope.playlistId + '&' : '';
@@ -276,7 +275,7 @@
                     $scope.request += ($scope.playlistTracks && $scope.playlistTrackMarket) ? 'market=' + $scope.playlistTrackMarket + '&' : '';
                     $scope.request = _.trimEnd($scope.request, '&');
                     $scope.request = _.trimEnd($scope.request, '?');
-                    $scope.submitDisabled = !($scope.playlistsAccessToken && $scope.playlistUserId && $scope.playlistId &&
+                    $scope.submitDisabled = !($scope.accessToken && $scope.playlistUserId && $scope.playlistId &&
                         ((!$scope.playlistTracks) || ($scope.playlistTracks && !isNaN($scope.playlistTrackLimit) && !isNaN($scope.playlistTracksOffset)))
                     );
                     $scope.status = null;
@@ -289,39 +288,67 @@
         $scope.submit = function() {
             $scope.code = null;
             $scope.response = null;
-            $http({method: 'GET', url: $scope.request, cache: $templateCache}).
-            then(
-                function (response) {
-                    $scope.status = response.status;
-                    $scope.data = response.data;
-                    //manipulation data cause the variation of result format
-                    var flag = true;
-                    var temp = [];
-                    _(jsonRoot).forEach(function (val) {
-                        if (_.has($scope.data, val) && flag && _.size($scope.data) === 1) {
-                            $scope.data = $scope.data[val];
+            if ($scope.qtype === 'playlist') {
+                $http({method: 'GET', url: $scope.request, cache: $templateCache}).then(
+                    function (response) {
+                        $scope.status = response.status;
+                        $scope.data = response.data;
+                        //manipulation data cause the variation of result format
+                        var flag = true;
+                        var temp = [];
+                        _(jsonRoot).forEach(function (val) {
+                            if (_.has($scope.data, val) && flag && _.size($scope.data) === 1) {
+                                $scope.data = $scope.data[val];
+                                flag = false;
+                            }
+                        });
+                        if (_.has($scope.data, 'items')) {
+                            $scope.data = $scope.data.items;
+                            flag = false;
+                            if ($scope.qtype == 'playlist' && $scope.playlistTracks) {
+                                _($scope.data).forEach(function (val) {
+                                    temp.push(val.track);
+                                });
+                                $scope.data = temp;
+                            }
+                        }
+                        if (flag) {
+                            $scope.data = [$scope.data];
+                        }
+
+                    }, function (response) {
+                        $scope.data = response.data || "Request failed";
+                        $scope.status = response.status;
+                    }
+                );
+            } else {
+                $http({method: 'GET', headers: {"Authorization": "Bearer " + $scope.accessToken}, url: $scope.request, cache: $templateCache}).then(
+                    function (response) {
+                        $scope.status = response.status;
+                        $scope.data = response.data;
+                        //manipulation data cause the variation of result format
+                        var flag = true;
+                        var temp = [];
+                        _(jsonRoot).forEach(function (val) {
+                            if (_.has($scope.data, val) && flag && _.size($scope.data) === 1) {
+                                $scope.data = $scope.data[val];
+                                flag = false;
+                            }
+                        });
+                        if (_.has($scope.data, 'items')) {
+                            $scope.data = $scope.data.items;
                             flag = false;
                         }
-                    });
-                    if (_.has($scope.data, 'items')) {
-                        $scope.data = $scope.data.items;
-                        flag = false;
-                        if ($scope.qtype == 'playlist' && $scope.playlistTracks) {
-                            _($scope.data).forEach(function (val) {
-                                temp.push(val.track);
-                            });
-                            $scope.data = temp;
+                        if (flag) {
+                            $scope.data = [$scope.data];
                         }
-                    }
-                    if (flag) {
-                        $scope.data = [$scope.data];
-                    }
 
-                }, function (response) {
-                    $scope.data = response.data || "Request failed";
-                    $scope.status = response.status;
-                }
-            );
+                    }, function (response) {
+                        $scope.data = response.data || "Request failed";
+                        $scope.status = response.status;
+                    }
+                );
+            }
         };
 
         // results display
